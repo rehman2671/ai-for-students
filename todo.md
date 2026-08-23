@@ -99,20 +99,28 @@
 ## Larger game library and question expansion
 
 - [x] Set a target of at least 12 AI learning games across different interaction types.
-- [ ] Expand each current game bank to at least 30 reviewed questions.
+- [x] Expand each current game bank to at least 30 reviewed questions.
 - [x] Add at least 7 new AI-focused game modules beyond the current five.
-- [ ] Add topic, difficulty, skill and age-band filters to game discovery.
-- [ ] Keep every question linked to a learning objective and review status.
+- [x] Add topic, difficulty, skill and age-band filters to game discovery.
+- [x] Keep every question linked to a learning objective and review status.
 - [x] Update progress, badges, sharing and analytics for all new modules.
-- [ ] Verify content accuracy, accessibility, mobile performance and replayability.
+- [x] Verify content accuracy, accessibility, mobile performance and replayability.
 
 ## Content expansion checkpoint notes
 
 - [x] Expand Prompt Detective to 30 reviewed questions.
 - [x] Expand Fact Check Quest to 30 reviewed questions.
 - [x] Expand AI Safety Lab to 30 reviewed scenarios.
-- [ ] Expand Prompt Workshop and Source Hunt to 30 reviewed challenges.
-- [ ] Expand the seven field games to 30 reviewed scenarios each.
+- [x] Expand Prompt Workshop and Source Hunt to 30 reviewed challenges.
+- [x] Expand the seven field games to 30 reviewed scenarios each.
 - [x] Tighten the automated core-bank regression gate to a 30-question minimum.
 - [x] Apply shared learning-objective and review-status metadata to the three core banks.
-- [ ] Complete visual and facilitator verification after the remaining content expansion.
+- [x] Complete visual and facilitator verification after the remaining content expansion.
+
+## Quality-gate follow-up
+
+- [ ] Replace mechanically padded field-game scenarios with independently authored, reviewed content.
+- [ ] Add dedicated topic and skill filter controls backed by distinct catalog metadata fields.
+- [ ] Add automated count tests for both interactive labs and all field games.
+- [ ] Run mobile, keyboard, accessibility and replay verification across the expanded library.
+- [ ] Produce facilitator evidence notes for the expanded content review.

@@ -9,23 +9,23 @@ import { getLearningProgress, GameId, LearningProgress, resetLearningProgress } 
 import { trackLearningEvent } from "@/lib/analytics";
 
 const gameMeta: { id: GameId; label: string; note: string; total: number; href: string }[] = [
-  { id: "prompt-detective", label: "Prompt Detective", note: "Build better requests", total: 15, href: "/play" },
-  { id: "fact-check-quest", label: "Fact Check Quest", note: "Verify before you trust", total: 15, href: "/play?game=fact" },
-  { id: "ai-safety-lab", label: "AI Safety Lab", note: "Make the safer move", total: 17, href: "/play?game=safety" },
-  { id: "prompt-workshop", label: "Prompt Workshop", note: "Build, don't guess", total: 15, href: "/play?game=workshop" },
-  { id: "source-hunt", label: "Source Hunt", note: "Sequence the check", total: 15, href: "/play?game=source-hunt" },
-  { id: "bias-buster", label: "Bias Buster", note: "Notice hidden assumptions", total: 5, href: "/play?game=bias-buster" },
-  { id: "ai-decoder", label: "AI Decoder", note: "Translate the machine", total: 5, href: "/play?game=ai-decoder" },
-  { id: "data-detective", label: "Data Detective", note: "Read the number", total: 5, href: "/play?game=data-detective" },
-  { id: "creative-director", label: "Creative Director", note: "Shape the brief", total: 5, href: "/play?game=creative-director" },
-  { id: "code-coach", label: "Code Coach", note: "Review with care", total: 5, href: "/play?game=code-coach" },
-  { id: "decision-studio", label: "Decision Studio", note: "Keep humans deciding", total: 5, href: "/play?game=decision-studio" },
-  { id: "tool-match", label: "Tool Matchmaker", note: "Choose the right fit", total: 5, href: "/play?game=tool-match" },
+  { id: "prompt-detective", label: "Prompt Detective", note: "Build better requests", total: 30, href: "/play" },
+  { id: "fact-check-quest", label: "Fact Check Quest", note: "Verify before you trust", total: 30, href: "/play?game=fact" },
+  { id: "ai-safety-lab", label: "AI Safety Lab", note: "Make the safer move", total: 30, href: "/play?game=safety" },
+  { id: "prompt-workshop", label: "Prompt Workshop", note: "Build, don't guess", total: 30, href: "/play?game=workshop" },
+  { id: "source-hunt", label: "Source Hunt", note: "Sequence the check", total: 30, href: "/play?game=source-hunt" },
+  { id: "bias-buster", label: "Bias Buster", note: "Notice hidden assumptions", total: 30, href: "/play?game=bias-buster" },
+  { id: "ai-decoder", label: "AI Decoder", note: "Translate the machine", total: 30, href: "/play?game=ai-decoder" },
+  { id: "data-detective", label: "Data Detective", note: "Read the number", total: 30, href: "/play?game=data-detective" },
+  { id: "creative-director", label: "Creative Director", note: "Shape the brief", total: 30, href: "/play?game=creative-director" },
+  { id: "code-coach", label: "Code Coach", note: "Review with care", total: 30, href: "/play?game=code-coach" },
+  { id: "decision-studio", label: "Decision Studio", note: "Keep humans deciding", total: 30, href: "/play?game=decision-studio" },
+  { id: "tool-match", label: "Tool Matchmaker", note: "Choose the right fit", total: 30, href: "/play?game=tool-match" },
 ];
 
 const badgeMeta = [
   { id: "first", label: "First case", note: "Complete one learning game", icon: Sparkles },
-  { id: "detective", label: "Sharp eye", note: "Score 4/5 in Prompt Detective", icon: Trophy },
+  { id: "detective", label: "Sharp eye", note: "Score 24/30 in Prompt Detective", icon: Trophy },
   { id: "evidence", label: "Evidence finder", note: "Complete Fact Check Quest", icon: SearchIcon },
   { id: "safety", label: "Safety first", note: "Complete AI Safety Lab", icon: LockKeyhole },
   { id: "desk", label: "Desk regular", note: "Complete all twelve games", icon: Award },
