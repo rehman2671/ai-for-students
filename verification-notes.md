@@ -7,3 +7,5 @@ The desktop game hub and progress dashboard were previously captured at 1280×72
 The account page was opened while signed out. It clearly states that guest play remains available and offers a separate Sign in action for cross-device persistence. No runtime error was visible. The sign-in action was not activated because completing OAuth requires user-controlled authentication.
 
 A guest Source Hunt replay opened successfully and showed the first sequence challenge without login. The initial replay exposed a 28-case count, which was corrected by adding two distinct challenges; the source now has a 30-case bank and the direct count test passes. Field-game extensions remain transparently tagged as needing facilitator review rather than being represented as fully reviewed.
+
+The final mobile pass on the Source Hunt route shows the search field, difficulty, age-band, topic and skill controls as separate full-width controls with clear labels and no visible clipping in the initial viewport.
