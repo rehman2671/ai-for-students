@@ -120,7 +120,7 @@
 ## Quality-gate follow-up
 
 - [ ] Replace mechanically padded field-game scenarios with independently authored, reviewed content.
-- [ ] Add dedicated topic and skill filter controls backed by distinct catalog metadata fields.
-- [ ] Add automated count tests for both interactive labs and all field games.
+- [x] Add dedicated topic and skill filter controls backed by distinct catalog metadata fields.
+- [x] Add automated count tests for both interactive labs and all field games.
 - [ ] Run mobile, keyboard, accessibility and replay verification across the expanded library.
 - [ ] Produce facilitator evidence notes for the expanded content review.

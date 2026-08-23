@@ -58,7 +58,7 @@ const baseMoreGameCatalog: MoreGameDefinition[] = [
 
 export const moreGameCatalog: MoreGameDefinition[] = baseMoreGameCatalog.map((game) => ({
   ...game,
-  scenarios: [...game.scenarios, ...Array.from({ length: 25 }, (_, index) => choice(`${game.label} practice ${String(index + 6).padStart(2, "0")}: choose the most accountable next move.`, game.scenarios[0].skill, game.scenarios[0].choices[0].text, game.scenarios[0].choices[0].explanation, game.scenarios[0].choices.slice(1).map((item) => item.text)))].map((item, index) => ({ ...item, ...reviewedMeta(game.id, index, item.prompt, [item.skill]) })),
+  scenarios: [...game.scenarios, ...Array.from({ length: 25 }, (_, index) => choice(`${game.label} practice ${String(index + 6).padStart(2, "0")}: choose the most accountable next move.`, game.scenarios[0].skill, game.scenarios[0].choices[0].text, game.scenarios[0].choices[0].explanation, game.scenarios[0].choices.slice(1).map((item) => item.text)))].map((item, index) => ({ ...item, ...reviewedMeta(game.id, index, item.prompt, [item.skill]), reviewStatus: index < game.scenarios.length ? "reviewed" : "needs-facilitator-review" })),
 }));
 
 export default function MoreAIGame({ gameId }: { gameId: GameId }) {

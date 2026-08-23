@@ -6,6 +6,7 @@ import { questions } from "../client/src/data/gameQuestions";
 import { factQuestions } from "../client/src/components/game/FactCheckQuest";
 import { safetyQuestions } from "../client/src/components/game/AISafetyLab";
 import { moreGameCatalog } from "../client/src/components/game/MoreAIGames";
+import { challenges as interactiveLabChallenges } from "../client/src/components/game/InteractiveLab";
 import type { TrpcContext } from "./_core/context";
 
 const baseContext = (user?: TrpcContext["user"]): TrpcContext => ({
@@ -19,6 +20,8 @@ describe("learning progress access", () => {
     expect(questions.length).toBeGreaterThanOrEqual(30);
     expect(factQuestions.length).toBeGreaterThanOrEqual(30);
     expect(safetyQuestions.length).toBeGreaterThanOrEqual(30);
+    expect(interactiveLabChallenges.workshop.length).toBeGreaterThanOrEqual(30);
+    expect(interactiveLabChallenges["source-hunt"].length).toBeGreaterThanOrEqual(30);
     expect(moreGameCatalog).toHaveLength(7);
     for (const game of moreGameCatalog) expect(game.scenarios.length).toBeGreaterThanOrEqual(30);
   });
