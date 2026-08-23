@@ -16,6 +16,7 @@ import {
   X,
 } from "lucide-react";
 import { toast } from "sonner";
+import AuthControls from "@/components/AuthControls";
 
 const heroImage = "/manus-storage/ai-students-hero_35b0cd1d.png";
 const studyImage = "/manus-storage/ai-students-study_51c9ad49.png";
@@ -76,6 +77,7 @@ function Header() {
         </nav>
         <div className="header-actions">
           <a className="header-link" href="/progress">Your progress <ArrowUpRight size={14} /></a>
+          <AuthControls />
           <button className="mobile-menu" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"}>
             {open ? <X size={21} /> : <Menu size={21} />}
           </button>

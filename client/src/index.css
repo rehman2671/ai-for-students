@@ -490,3 +490,14 @@ h1 span, h2 em { color: var(--evergreen); font-style: italic; font-weight: 500; 
 .feedback-choices button:hover { background: var(--paper-light); }
 .feedback-thanks { display: inline-flex; align-items: center; gap: 6px; color: var(--evergreen); font-size: 11px; }
 @media (max-width: 680px) { .post-game-feedback { align-items: flex-start; flex-direction: column; } }
+
+/* Hybrid account controls: guests can explore freely; signed-in learners get a compact identity and logout action. */
+.auth-action, .auth-user { display: inline-flex; align-items: center; gap: 6px; }
+.auth-action { padding: 8px 11px; color: var(--evergreen); border: 1px solid var(--evergreen); background: transparent; font-size: 10px; font-weight: 700; }
+.auth-action:hover { color: var(--paper-light); background: var(--evergreen); }
+.auth-action--quiet { padding: 0; border: 0; color: #81796e; font-weight: 500; }
+.auth-action--quiet:hover { color: var(--evergreen); background: transparent; }
+.auth-user { color: var(--evergreen); font-size: 10px; font-weight: 700; }
+.auth-user > span { display: inline-flex; align-items: center; gap: 5px; }
+.auth-status--loading { color: #81796e; font-size: 10px; }
+@media (max-width: 760px) { .auth-user { display: none; } .auth-action { padding: 7px 8px; font-size: 9px; } }

@@ -9,8 +9,8 @@ import GamePage from "./pages/GamePage";
 import ProgressPage from "./pages/ProgressPage";
 import CertificatePage from "./pages/CertificatePage";
 import NotFound from "./pages/NotFound";
-
 function Router() {
+  // make sure to consider if you need authentication for certain routes
   return (
     <Switch>
       <Route path="/" component={Home} />

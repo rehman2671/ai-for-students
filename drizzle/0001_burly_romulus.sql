@@ -1,0 +1,1 @@
+ALTER TABLE `learningProgress` ADD CONSTRAINT `learningProgress_user_game_unique` UNIQUE(`userId`,`gameId`);
