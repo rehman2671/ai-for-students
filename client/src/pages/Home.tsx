@@ -128,7 +128,7 @@ export default function Home() {
               <h1>Learn the tool.<br /><span>Keep the thinking.</span></h1>
               <p className="hero-lede">A clear, useful place for students and curious learners to understand AI, build better habits and get unstuck—without handing over the work that makes learning matter.</p>
               <div className="hero-actions">
-                <a href="#study-with-ai" className="button button--primary">Open the study toolkit <ArrowUpRight size={16} /></a>
+                <a href="/play" className="button button--primary">Open the study toolkit <ArrowUpRight size={16} /></a>
                 <a href="#prompts" className="text-link">Browse prompts <ChevronRight size={16} /></a>
               </div>
               <div className="hero-note"><span className="note-pin" /> No hype. No shortcuts. Just useful next steps.</div>
@@ -140,7 +140,7 @@ export default function Home() {
               </div>
               <div className="toolkit-stack" aria-label="Quick learning paths">
                 <div className="stack-heading"><span>Today's toolkit</span><Sparkles size={15} /></div>
-                {toolkit.map(({ icon: Icon, label, copy, color }, index) => <a href={index === 1 ? "#study-with-ai" : "#learn-ai"} className={`toolkit-row toolkit-row--${color}`} key={label}><span className="toolkit-icon"><Icon size={17} /></span><span><strong>{label}</strong><small>{copy}</small></span><ArrowUpRight size={16} /></a>)}
+                {toolkit.map(({ icon: Icon, label, copy, color }, index) => <a href={index === 1 ? "/play" : "#learn-ai"} className={`toolkit-row toolkit-row--${color}`} key={label}><span className="toolkit-icon"><Icon size={17} /></span><span><strong>{label}</strong><small>{copy}</small></span><ArrowUpRight size={16} /></a>)}
               </div>
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function Home() {
                 ["01", "I want to understand AI", "Plain-language lessons for the curious beginner", "Learn the essentials"],
                 ["02", "I want to study better", "Prompts and workflows that protect your thinking", "Explore study tools"],
                 ["03", "I want to get career-ready", "Practical help for CVs, interviews and new skills", "Build your edge"],
-              ].map(([num, title, copy, cta]) => <a className="path-row" href={num === "02" ? "#study-with-ai" : "#prompts"} key={num}><span className="path-number">{num}</span><span className="path-content"><strong>{title}</strong><small>{copy}</small></span><span className="path-cta">{cta} <ArrowUpRight size={15} /></span></a>)}
+              ].map(([num, title, copy, cta]) => <a className="path-row" href={num === "02" ? "/play" : "#prompts"} key={num}><span className="path-number">{num}</span><span className="path-content"><strong>{title}</strong><small>{copy}</small></span><span className="path-cta">{cta} <ArrowUpRight size={15} /></span></a>)}
             </div>
           </div>
         </section>
@@ -163,7 +163,7 @@ export default function Home() {
         <section className="feature-section" id="study-with-ai">
           <div className="container feature-layout">
             <div className="feature-image-wrap"><img src={studyImage} alt="Study notes and flashcards arranged on a desk" /><span className="image-stamp">TRY THIS</span></div>
-            <div className="feature-copy"><SectionLabel>STUDY WITH AI</SectionLabel><h2>Use AI as a<br /><em>thinking partner.</em></h2><p>Good study support does not give you an answer and disappear. It helps you ask a sharper question, spot a gap and practice until the idea is yours.</p><div className="check-list"><span><Check size={15} /> Explain a concept in your own words</span><span><Check size={15} /> Turn notes into active recall</span><span><Check size={15} /> Get feedback without losing your voice</span></div><a href="#prompts" className="button button--ink">See study prompts <ArrowUpRight size={16} /></a></div>
+            <div className="feature-copy"><SectionLabel>STUDY WITH AI</SectionLabel><h2>Use AI as a<br /><em>thinking partner.</em></h2><p>Good study support does not give you an answer and disappear. It helps you ask a sharper question, spot a gap and practice until the idea is yours.</p><div className="check-list"><span><Check size={15} /> Explain a concept in your own words</span><span><Check size={15} /> Turn notes into active recall</span><span><Check size={15} /> Get feedback without losing your voice</span></div><a href="/play" className="button button--ink">Play a study case <ArrowUpRight size={16} /></a></div>
           </div>
         </section>
 

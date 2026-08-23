@@ -284,3 +284,102 @@ h1 span, h2 em { color: var(--evergreen); font-style: italic; font-weight: 500; 
   * { @apply border-border outline-ring/50; }
   body { @apply bg-background text-foreground; }
 }
+
+
+/* Study Desk Editorial game surface: an evidence-board lesson with index tabs, ruled lines and clear learning feedback. */
+.game-page { min-height: 100vh; background: var(--paper); color: var(--ink); }
+.game-header { display: flex; align-items: center; justify-content: space-between; min-height: 74px; padding: 0 5vw; border-bottom: 1px solid var(--line); }
+.game-brand { display: inline-flex; align-items: center; gap: 10px; font-family: "Fraunces", serif; font-size: 17px; letter-spacing: -.03em; }
+.game-brand img { width: 31px; height: 31px; object-fit: contain; }
+.game-brand strong { font-weight: 700; }
+.game-brand em { font-style: italic; }
+.game-return { display: inline-flex; align-items: center; gap: 7px; color: var(--evergreen); font-size: 12px; font-weight: 700; }
+.game-main { max-width: 1180px; margin: auto; padding: 74px 28px 90px; }
+.game-intro { display: flex; align-items: end; justify-content: space-between; gap: 30px; margin-bottom: 36px; }
+.game-intro-top { display: contents; }
+.game-kicker { color: var(--evergreen); font-size: 10px; font-weight: 700; letter-spacing: .15em; }
+.game-intro h1 { margin: 17px 0 0; font-size: clamp(52px, 7vw, 92px); line-height: .85; }
+.game-intro h1 em { color: var(--evergreen); font-style: italic; font-weight: 500; }
+.game-intro p { max-width: 270px; margin: 0 30px 3px 0; color: #6a6256; font-size: 15px; line-height: 1.6; }
+.game-resource { display: inline-flex; align-items: center; gap: 7px; color: #6a6256; font-size: 11px; font-weight: 700; white-space: nowrap; }
+.game-board { position: relative; padding: 40px clamp(20px, 5vw, 70px) 56px; background: var(--paper-light); border: 1px solid var(--line); box-shadow: 12px 12px 0 var(--sage); }
+.game-board::before { content: ""; position: absolute; inset: 14px; pointer-events: none; border: 1px solid rgba(216,205,187,.52); }
+.game-board-tab { position: absolute; z-index: 2; top: -14px; left: 27px; padding: 8px 13px; color: var(--ink); background: var(--saffron); font-size: 9px; font-weight: 700; letter-spacing: .14em; }
+.game-board-tab span { margin-left: 9px; color: var(--evergreen); }
+.game-picker, .game-play, .game-result { position: relative; z-index: 1; max-width: 850px; margin: auto; }
+.game-picker-heading { max-width: 570px; }
+.game-picker-heading h2 { margin: 17px 0 0; font-size: clamp(38px, 5vw, 64px); line-height: .94; }
+.game-picker-heading h2 em { color: var(--evergreen); font-style: italic; font-weight: 500; }
+.game-picker-heading p { max-width: 430px; margin: 21px 0 0; color: #6a6256; line-height: 1.55; }
+.lesson-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 13px; margin-top: 38px; }
+.lesson-card { position: relative; min-height: 180px; display: flex; flex-direction: column; align-items: flex-start; padding: 20px; text-align: left; background: #f0ebdf; border: 1px solid var(--line); transition: transform .18s var(--ease-out), box-shadow .18s var(--ease-out), background .18s var(--ease-out); }
+.lesson-card:hover { transform: translateY(-5px); background: var(--sage); box-shadow: 6px 6px 0 var(--saffron); }
+.lesson-number { color: var(--saffron); font-family: "Fraunces", serif; font-size: 20px; }
+.lesson-card strong { margin-top: 20px; font-family: "Fraunces", serif; font-size: 23px; font-weight: 600; }
+.lesson-card small { max-width: 160px; margin-top: 6px; color: #70675a; line-height: 1.45; }
+.lesson-start { display: inline-flex; align-items: center; gap: 5px; margin-top: auto; padding-top: 16px; color: var(--evergreen); font-size: 10px; font-weight: 700; }
+.best-score { display: flex; align-items: center; gap: 7px; margin-top: 25px; color: #71685d; font-size: 12px; }
+.best-score svg { color: var(--saffron); }
+.game-progress-row { display: flex; justify-content: space-between; color: #7b7265; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.game-progress { height: 5px; margin-top: 10px; background: #e9e0d1; }
+.game-progress span { display: block; height: 100%; background: var(--saffron); transition: width .25s var(--ease-out); }
+.game-scenario { margin: 47px 0 28px; padding-left: 19px; border-left: 5px solid var(--saffron); }
+.game-scenario h2 { max-width: 780px; margin-top: 15px; font-size: clamp(28px, 4vw, 43px); line-height: 1.05; }
+.answer-list { display: grid; gap: 11px; }
+.answer-card { display: flex; align-items: center; gap: 17px; width: 100%; padding: 17px 20px; color: var(--ink); background: #f6f1e8; border: 1px solid var(--line); text-align: left; transition: transform .16s var(--ease-out), border-color .16s var(--ease-out), background .16s var(--ease-out); }
+.answer-card:not(:disabled):hover { transform: translateX(5px); border-color: var(--evergreen); background: var(--sage); }
+.answer-card:disabled { cursor: default; }
+.answer-card.is-correct { border-color: #4c8261; background: #e0eee1; }
+.answer-card.is-wrong { border-color: #bc7464; background: #f3dfd8; }
+.answer-letter { display: grid; flex: 0 0 30px; place-items: center; width: 30px; height: 30px; color: var(--evergreen); border: 1px solid var(--evergreen); border-radius: 50%; font-family: "Fraunces", serif; font-size: 15px; }
+.answer-card > span:nth-child(2) { flex: 1; font-size: 14px; line-height: 1.45; }
+.answer-status { color: #347451; }
+.answer-card.is-wrong .answer-status { color: #a64d40; }
+.game-feedback { display: flex; gap: 13px; margin-top: 20px; padding: 16px 18px; border-left: 4px solid var(--evergreen); background: var(--sage); }
+.game-feedback--learn { border-left-color: var(--saffron); background: #f7ecd5; }
+.feedback-icon { display: grid; flex: 0 0 27px; place-items: center; width: 27px; height: 27px; color: var(--paper-light); background: var(--evergreen); border-radius: 50%; }
+.game-feedback--learn .feedback-icon { color: var(--ink); background: var(--saffron); }
+.game-feedback strong { display: block; font-family: "Fraunces", serif; font-size: 18px; }
+.game-feedback p { margin: 5px 0 0; color: #5f584d; font-size: 12px; line-height: 1.5; }
+.game-footer-actions { display: flex; align-items: center; justify-content: space-between; margin-top: 30px; }
+.game-back { display: inline-flex; align-items: center; gap: 7px; border: 0; color: #756d62; background: none; font-size: 11px; font-weight: 700; }
+.game-button { display: inline-flex; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 999px; padding: 13px 18px; font-size: 12px; font-weight: 700; transition: transform .16s var(--ease-out), background .18s var(--ease-out); }
+.game-button:active { transform: scale(.97); }
+.game-button:disabled { cursor: not-allowed; opacity: .45; }
+.game-button--primary { color: var(--paper-light); background: var(--evergreen); }
+.game-button--primary:hover:not(:disabled) { background: #24574b; transform: translateY(-2px); }
+.game-button--quiet { color: var(--evergreen); background: transparent; border: 1px solid var(--evergreen); }
+.game-result { display: flex; flex-direction: column; align-items: center; padding: 35px 0 14px; text-align: center; }
+.result-mark { display: grid; place-items: center; width: 58px; height: 58px; color: var(--ink); background: var(--saffron); border-radius: 50%; }
+.game-result h2 { margin-top: 19px; color: var(--evergreen); font-size: 92px; line-height: .8; }
+.game-result h2 small { color: #8b8172; font-family: "Fraunces", serif; font-size: 28px; font-weight: 500; }
+.result-message { color: #6a6256; font-size: 15px; }
+.result-note { display: grid; gap: 5px; max-width: 400px; margin-top: 15px; padding: 17px 23px; background: var(--sage); text-align: left; }
+.result-note strong { color: var(--evergreen); font-family: "Fraunces", serif; font-size: 18px; }
+.result-note span { color: #5f584d; font-size: 12px; line-height: 1.5; }
+.game-result-actions { display: flex; gap: 11px; margin-top: 27px; }
+.game-page-footer { display: flex; justify-content: space-between; max-width: 1180px; margin: auto; padding: 22px 28px 37px; color: #8a8174; border-top: 1px solid var(--line); font-size: 10px; letter-spacing: .05em; }
+
+@media (max-width: 680px) {
+  .game-header { min-height: 66px; padding-inline: 18px; }
+  .game-return { font-size: 0; }
+  .game-return svg { width: 19px; height: 19px; }
+  .game-main { padding: 55px 15px 72px; }
+  .game-intro { align-items: flex-start; flex-direction: column; gap: 15px; margin-left: 5px; }
+  .game-intro p { margin: 0; }
+  .game-resource { position: absolute; right: 15px; top: 77px; }
+  .game-board { padding: 36px 17px 36px; box-shadow: 6px 6px 0 var(--sage); }
+  .game-board::before { inset: 9px; }
+  .game-board-tab { left: 16px; font-size: 8px; }
+  .lesson-grid { grid-template-columns: 1fr; gap: 10px; }
+  .lesson-card { min-height: 125px; }
+  .lesson-card strong { margin-top: 10px; }
+  .lesson-start { position: absolute; right: 19px; bottom: 20px; }
+  .game-scenario { margin-top: 34px; }
+  .answer-card { align-items: flex-start; padding: 14px; }
+  .answer-letter { flex-basis: 27px; width: 27px; height: 27px; }
+  .answer-card > span:nth-child(2) { font-size: 13px; }
+  .game-footer-actions { gap: 12px; }
+  .game-result-actions { align-items: stretch; flex-direction: column; width: 100%; }
+  .game-page-footer { padding-inline: 18px; }
+}
