@@ -383,3 +383,33 @@ h1 span, h2 em { color: var(--evergreen); font-style: italic; font-weight: 500; 
   .game-result-actions { align-items: stretch; flex-direction: column; width: 100%; }
   .game-page-footer { padding-inline: 18px; }
 }
+
+
+/* Study Desk Editorial game hub: numbered index tabs make the learning sequence visible. */
+.game-switcher { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; max-width: 850px; margin: 0 auto 20px; }
+.game-switcher a { display: flex; align-items: center; gap: 11px; padding: 12px 14px; color: #71685d; border: 1px solid var(--line); background: var(--paper-light); transition: transform .18s var(--ease-out), background .18s var(--ease-out), border-color .18s var(--ease-out); }
+.game-switcher a:hover, .game-switcher a.is-current { color: var(--evergreen); border-color: var(--evergreen); background: var(--sage); }
+.game-switcher a:hover { transform: translateY(-2px); }
+.game-switcher a > svg { color: var(--saffron); }
+.game-switcher a span { flex: 1; }
+.game-switcher strong, .game-switcher small { display: block; }
+.game-switcher strong { font-family: "Fraunces", serif; font-size: 15px; font-weight: 600; }
+.game-switcher small { margin-top: 2px; font-size: 10px; }
+.fact-preview { display: flex; align-items: center; gap: 14px; max-width: 500px; margin: 30px 0 23px; padding: 15px 17px; background: var(--sage); }
+.fact-preview-icon { display: grid; flex: 0 0 43px; place-items: center; width: 43px; height: 43px; color: var(--evergreen); border: 1px solid var(--evergreen); border-radius: 50%; }
+.fact-preview strong { color: var(--evergreen); font-family: "Fraunces", serif; font-size: 18px; }
+.fact-preview p { margin: 3px 0 0; color: #5f685f; font-size: 12px; line-height: 1.45; }
+.fact-start { margin-top: 3px; }
+.fact-claim { margin: 42px 0 27px; padding: 21px 24px 22px; background: #f0ebdf; border-left: 5px solid var(--saffron); }
+.fact-claim blockquote { margin: 14px 0 12px; color: var(--evergreen); font-family: "Fraunces", serif; font-size: clamp(25px, 3vw, 35px); line-height: 1.06; }
+.fact-claim p { margin: 0; color: #6c6458; font-size: 13px; line-height: 1.5; }
+@media (max-width: 680px) {
+  .game-switcher { grid-template-columns: 1fr; margin-bottom: 14px; }
+  .game-switcher a { padding: 10px 12px; }
+  .fact-preview { align-items: flex-start; }
+  .fact-claim { padding: 18px 15px; }
+  .fact-claim blockquote { font-size: 27px; }
+}
+
+.game-art-note { position: absolute; z-index: 2; right: 27px; top: -30px; width: 150px; height: 92px; object-fit: cover; border: 6px solid var(--paper-light); box-shadow: 4px 5px 0 var(--saffron); transform: rotate(2deg); }
+@media (max-width: 680px) { .game-art-note { display: none; } }

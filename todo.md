@@ -11,3 +11,12 @@
 - [ ] Add analytics events for starts, answers, completion and replay.
 - [ ] Test learning flow, answer correctness, accessibility and responsive layout.
 - [ ] Document future game modules and content authoring workflow.
+
+## Next game: Fact Check Quest
+
+- [ ] Define fact-checking learning outcomes and reviewed scenarios.
+- [ ] Add a reusable game selection/progression model.
+- [ ] Implement Fact Check Quest gameplay and explanations.
+- [ ] Add game selector and continuity between both games.
+- [ ] Verify mobile, keyboard, scoring and replay behavior.
+- [ ] Save a new checkpoint after production verification.
