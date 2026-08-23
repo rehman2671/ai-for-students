@@ -9,6 +9,7 @@ import GamePage from "./pages/GamePage";
 import ProgressPage from "./pages/ProgressPage";
 import CertificatePage from "./pages/CertificatePage";
 import NotFound from "./pages/NotFound";
+import AccountPage from "./pages/AccountPage";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -17,6 +18,7 @@ function Router() {
       <Route path="/play" component={GamePage} />
       <Route path="/progress" component={ProgressPage} />
       <Route path="/certificate" component={CertificatePage} />
+      <Route path="/account" component={AccountPage} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

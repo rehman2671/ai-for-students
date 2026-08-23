@@ -16,6 +16,12 @@ describe("learning progress access", () => {
     await expect(caller.learning.list()).rejects.toMatchObject({ code: "UNAUTHORIZED" });
   });
 
+  it("protects account export and deletion procedures", async () => {
+    const caller = appRouter.createCaller(baseContext());
+    await expect(caller.learning.export()).rejects.toMatchObject({ code: "UNAUTHORIZED" });
+    await expect(caller.learning.deleteAccount()).rejects.toMatchObject({ code: "UNAUTHORIZED" });
+  });
+
   it("expires inactive guest sessions after the retention window", () => {
     const now = Date.parse("2026-08-24T00:00:00.000Z");
     const old = new Date(now - (GUEST_RETENTION_DAYS + 1) * 24 * 60 * 60 * 1000).toISOString();

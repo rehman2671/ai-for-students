@@ -129,3 +129,10 @@ export async function deleteLearningProgressForUser(userId: number) {
   if (!db) throw new Error("Database is not available");
   await db.delete(learningProgress).where(eq(learningProgress.userId, userId));
 }
+
+export async function deleteUserAccount(userId: number) {
+  const db = await getDb();
+  if (!db) throw new Error("Database is not available");
+  await db.delete(users).where(eq(users.id, userId));
+}
+

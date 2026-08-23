@@ -58,7 +58,7 @@
 - [x] Upgrade project with authentication and persistent user data.
 - [x] Define guest-progress-to-account migration and conflict rules.
 - [x] Sync game progress, badges, feedback and certificates for logged-in users.
-- [ ] Add account settings, export and deletion behavior.
+- [x] Add account settings, export and deletion behavior.
 - [x] Separate anonymous analytics from account data.
 - [x] Test guest, login, logout, migration and multi-device flows.
 
@@ -69,4 +69,16 @@
 - [x] Add deterministic merge tests for downgrade and race cases.
 - [x] Decide and document whether feedback and certificates are account-scoped or anonymous/browser-scoped.
 - [x] Add persistence and retrieval only if account-scoped feedback/certificates are required.
-- [ ] Run end-to-end guest, login, logout, migration and multi-device verification before marking those flows complete.
+- [ ] Run end-to-end guest, login, logout, migration and multi-device verification before marking those flows complete. Requires user-run OAuth and a second browser/device.
+
+## Account-controls QA remediation
+
+- [x] Add account export loading, empty and error states.
+- [x] Add account deletion pending, error and success feedback.
+- [x] Add protected export and deletion procedure tests.
+- [x] Add account-page flow verification notes.
+
+## Account-page verification closure
+
+- [x] Add an explicit account-page flow checklist covering guest, authenticated, loading, empty, error, export, delete confirmation and failure states.
+- [x] Record the available `/account` verification evidence and user-assisted scenarios still pending.
