@@ -1,4 +1,4 @@
-export type GameId = "prompt-detective" | "fact-check-quest" | "ai-safety-lab" | "prompt-workshop" | "source-hunt";
+export type GameId = "prompt-detective" | "fact-check-quest" | "ai-safety-lab" | "prompt-workshop" | "source-hunt" | "bias-buster" | "ai-decoder" | "data-detective" | "creative-director" | "code-coach" | "decision-studio" | "tool-match";
 
 export type GameProgress = { attempts: number; completions: number; bestScore: number; lastScore: number; lastPlayed: string | null };
 export type LearningProgress = Record<GameId, GameProgress>;
@@ -13,6 +13,13 @@ const empty = (): LearningProgress => ({
   "ai-safety-lab": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
   "prompt-workshop": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
   "source-hunt": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "bias-buster": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "ai-decoder": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "data-detective": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "creative-director": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "code-coach": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "decision-studio": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "tool-match": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
 });
 
 export function isGuestSessionExpired(touchedAt: string | null, now = Date.now()) {

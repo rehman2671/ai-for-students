@@ -14,10 +14,10 @@ const baseContext = (user?: TrpcContext["user"]): TrpcContext => ({
 });
 
 describe("learning progress access", () => {
-  it("keeps every current learning game at fifteen or more questions", () => {
-    expect(questions.length).toBeGreaterThanOrEqual(15);
-    expect(factQuestions.length).toBeGreaterThanOrEqual(15);
-    expect(safetyQuestions.length).toBeGreaterThanOrEqual(15);
+  it("keeps every core learning game at thirty or more reviewed questions", () => {
+    expect(questions.length).toBeGreaterThanOrEqual(30);
+    expect(factQuestions.length).toBeGreaterThanOrEqual(30);
+    expect(safetyQuestions.length).toBeGreaterThanOrEqual(30);
   });
   it("requires an authenticated user to read progress", async () => {
     const caller = appRouter.createCaller(baseContext());

@@ -558,3 +558,9 @@ h1 span, h2 em { color: var(--evergreen); font-style: italic; font-weight: 500; 
 .topics-empty { display: flex; gap: 10px; align-items: center; padding: 30px; color: #6c6458; background: var(--sage); }
 @media (max-width: 900px) { .topics-main { padding: 55px 20px 70px; } .topic-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 620px) { .topics-hero { display: block; } .topics-hero p { margin: 22px 0; } .topics-hero h1 { font-size: 60px; } .topic-grid { grid-template-columns: 1fr; } .topics-count { align-items: flex-start; flex-direction: column; gap: 7px; } }
+
+/* Expanded game library controls */
+.game-filters { display: grid; grid-template-columns: minmax(220px, 1fr) 150px 140px; gap: 10px; max-width: 850px; margin: 0 auto 12px; }
+.game-filters input, .game-filters select { min-height: 42px; padding: 0 12px; border: 1px solid var(--line); background: var(--paper-light); color: var(--ink); font: inherit; }
+.game-filters input:focus, .game-filters select:focus { outline: 2px solid var(--saffron); outline-offset: 2px; }
+@media (max-width: 680px) { .game-filters { grid-template-columns: 1fr; } }
