@@ -131,7 +131,7 @@ export default function Home() {
               <p className="hero-lede">A clear, useful place for students and curious learners to understand AI, build better habits and get unstuck—without handing over the work that makes learning matter.</p>
               <div className="hero-actions">
                 <a href="/play" className="button button--primary">Open the study toolkit <ArrowUpRight size={16} /></a>
-                <a href="#prompts" className="text-link">Browse prompts <ChevronRight size={16} /></a>
+                <a href="#prompts" className="text-link">Browse prompts <ChevronRight size={16} /></a><a href="/topics" className="text-link">Explore 120 topics <ChevronRight size={16} /></a>
               </div>
               <div className="hero-note"><span className="note-pin" /> No hype. No shortcuts. Just useful next steps.</div>
             </div>

@@ -1,4 +1,4 @@
-export type GameId = "prompt-detective" | "fact-check-quest" | "ai-safety-lab";
+export type GameId = "prompt-detective" | "fact-check-quest" | "ai-safety-lab" | "prompt-workshop" | "source-hunt";
 
 export type GameProgress = { attempts: number; completions: number; bestScore: number; lastScore: number; lastPlayed: string | null };
 export type LearningProgress = Record<GameId, GameProgress>;
@@ -11,6 +11,8 @@ const empty = (): LearningProgress => ({
   "prompt-detective": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
   "fact-check-quest": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
   "ai-safety-lab": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "prompt-workshop": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
+  "source-hunt": { attempts: 0, completions: 0, bestScore: 0, lastScore: 0, lastPlayed: null },
 });
 
 export function isGuestSessionExpired(touchedAt: string | null, now = Date.now()) {

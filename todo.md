@@ -82,3 +82,16 @@
 
 - [x] Add an explicit account-page flow checklist covering guest, authenticated, loading, empty, error, export, delete confirmation and failure states.
 - [x] Record the available `/account` verification evidence and user-assisted scenarios still pending.
+
+## Expanded AI learning games and sharing
+
+- [x] Define 100+ AI learning topics across age, skill and use-case tracks.
+- [x] Create a scalable topic, lesson, question and review-status schema.
+- [x] Expand Prompt Detective to at least 15 reviewed questions.
+- [x] Expand Fact Check Quest to at least 15 reviewed questions.
+- [x] Expand AI Safety Lab to at least 15 reviewed questions.
+- [x] Add at least two non-quiz interactive AI game formats.
+- [x] Add safe share cards for results, answers and learning streaks.
+- [x] Add Web Share, copy-link and social-preview fallbacks.
+- [x] Add referral attribution without exposing learner identity or answer data.
+- [x] Add content quality, accessibility and mobile verification for expanded games.

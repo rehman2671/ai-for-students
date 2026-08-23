@@ -10,6 +10,7 @@ import ProgressPage from "./pages/ProgressPage";
 import CertificatePage from "./pages/CertificatePage";
 import NotFound from "./pages/NotFound";
 import AccountPage from "./pages/AccountPage";
+import TopicsPage from "./pages/TopicsPage";
 function Router() {
   // make sure to consider if you need authentication for certain routes
   return (
@@ -19,6 +20,7 @@ function Router() {
       <Route path="/progress" component={ProgressPage} />
       <Route path="/certificate" component={CertificatePage} />
       <Route path="/account" component={AccountPage} />
+      <Route path="/topics" component={TopicsPage} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

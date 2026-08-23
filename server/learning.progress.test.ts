@@ -2,6 +2,9 @@ import { describe, expect, it } from "vitest";
 import { appRouter } from "./routers";
 import { mergeProgressValues } from "./db";
 import { GUEST_RETENTION_DAYS, isGuestSessionExpired } from "../client/src/lib/learningProgress";
+import { questions } from "../client/src/data/gameQuestions";
+import { factQuestions } from "../client/src/components/game/FactCheckQuest";
+import { safetyQuestions } from "../client/src/components/game/AISafetyLab";
 import type { TrpcContext } from "./_core/context";
 
 const baseContext = (user?: TrpcContext["user"]): TrpcContext => ({
@@ -11,6 +14,11 @@ const baseContext = (user?: TrpcContext["user"]): TrpcContext => ({
 });
 
 describe("learning progress access", () => {
+  it("keeps every current learning game at fifteen or more questions", () => {
+    expect(questions.length).toBeGreaterThanOrEqual(15);
+    expect(factQuestions.length).toBeGreaterThanOrEqual(15);
+    expect(safetyQuestions.length).toBeGreaterThanOrEqual(15);
+  });
   it("requires an authenticated user to read progress", async () => {
     const caller = appRouter.createCaller(baseContext());
     await expect(caller.learning.list()).rejects.toMatchObject({ code: "UNAUTHORIZED" });
