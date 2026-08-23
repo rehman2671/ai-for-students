@@ -30,3 +30,14 @@
 - [ ] Build learner progress dashboard with badges and empty states.
 - [ ] Verify mobile, keyboard, reduced motion and scoring flows.
 - [ ] Save a new checkpoint after full release verification.
+
+## Analytics, certificates and student testing
+
+- [x] Inspect the Umami connector/configuration and verify the live website identifier.
+- [x] Define Umami goal names and event properties for the three games.
+- [x] Add completion badge animation with reduced-motion fallback.
+- [x] Add shareable certificate view with print and Web Share support.
+- [x] Add a short post-game student feedback flow for difficulty and clarity.
+- [x] Add difficulty feedback analytics without collecting student identity.
+- [x] Create a facilitator test checklist for real student sessions.
+- [x] Verify the complete release and save a checkpoint.

@@ -7,6 +7,7 @@ import { ThemeProvider } from "./contexts/ThemeContext";
 import Home from "./pages/Home";
 import GamePage from "./pages/GamePage";
 import ProgressPage from "./pages/ProgressPage";
+import CertificatePage from "./pages/CertificatePage";
 import NotFound from "./pages/NotFound";
 
 function Router() {
@@ -15,6 +16,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/play" component={GamePage} />
       <Route path="/progress" component={ProgressPage} />
+      <Route path="/certificate" component={CertificatePage} />
       <Route path="/404" component={NotFound} />
       <Route component={NotFound} />
     </Switch>

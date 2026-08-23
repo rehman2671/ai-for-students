@@ -458,3 +458,35 @@ h1 span, h2 em { color: var(--evergreen); font-style: italic; font-weight: 500; 
 .game-hub-back { margin-bottom: 21px; }
 @media (max-width: 900px) { .game-switcher { grid-template-columns: 1fr; } .progress-top { grid-template-columns: 1fr; gap: 30px; } .progress-stats { justify-content: flex-start; } .dashboard-games { grid-template-columns: 1fr 1fr; } .badge-grid { grid-template-columns: repeat(3, 1fr); } }
 @media (max-width: 680px) { .progress-header { padding-inline: 18px; } .progress-main { padding: 55px 20px 70px; } .progress-top h1 { font-size: 56px; } .progress-stats { gap: 13px; } .progress-stats div { min-width: 105px; } .progress-stats strong { font-size: 33px; } .dashboard-section-head { grid-template-columns: 1fr; gap: 15px; } .dashboard-section-head h2 { font-size: 43px; } .dashboard-games, .badge-grid { grid-template-columns: 1fr; } .badge-card { min-height: 120px; } .badge-icon { width: 32px; height: 32px; } .badge-card strong { margin-top: 11px; } .progress-footer-actions { align-items: flex-start; flex-direction: column; gap: 18px; } }
+
+/* Study Desk Editorial celebration layer: a quick paper-stamp burst, with motion safely disabled when requested. */
+.badge-burst { animation: badge-pop .5s var(--ease-out) both; }
+@keyframes badge-pop { 0% { opacity: 0; transform: scale(.78) rotate(-8deg); } 65% { transform: scale(1.08) rotate(3deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+.certificate-page { min-height: 100vh; background: var(--paper); color: var(--ink); }
+.certificate-main { display: grid; place-items: center; padding: 66px 20px 80px; }
+.certificate-paper { position: relative; width: min(100%, 760px); min-height: 475px; padding: 42px 56px 38px; background: var(--paper-light); border: 1px solid var(--line); box-shadow: 12px 12px 0 var(--sage); text-align: center; }
+.certificate-paper::before, .certificate-paper::after { position: absolute; width: 35px; height: 35px; color: var(--saffron); font-size: 20px; content: "✦"; }
+.certificate-paper::before { top: 22px; left: 23px; } .certificate-paper::after { right: 23px; bottom: 20px; }
+.certificate-topline { display: flex; justify-content: space-between; padding-bottom: 15px; color: #847a6c; border-bottom: 1px solid var(--line); font-size: 9px; font-weight: 700; letter-spacing: .14em; }
+.certificate-mark { display: grid; place-items: center; width: 48px; height: 48px; margin: 32px auto 19px; color: var(--evergreen); background: var(--saffron); border-radius: 50%; }
+.certificate-paper h1 { margin: 14px 0 12px; color: var(--evergreen); font-family: "Fraunces", serif; font-size: clamp(42px, 6vw, 66px); line-height: .95; }
+.certificate-intro { max-width: 510px; margin: auto; color: #6e665b; font-size: 14px; line-height: 1.55; }
+.certificate-intro strong { color: var(--evergreen); }
+.certificate-score { display: flex; align-items: baseline; justify-content: center; gap: 10px; margin: 28px 0 26px; }
+.certificate-score strong { color: var(--evergreen); font-family: "Fraunces", serif; font-size: 52px; line-height: .8; }
+.certificate-score small { color: #948777; font-size: 20px; } .certificate-score span { color: #847a6c; font-size: 10px; text-transform: uppercase; letter-spacing: .1em; }
+.certificate-signature { display: flex; justify-content: space-between; max-width: 420px; margin: auto; padding-top: 15px; border-top: 1px solid var(--line); color: var(--evergreen); font-family: "Fraunces", serif; font-size: 16px; font-style: italic; }
+.certificate-id { margin-top: 25px; color: #9b9183; font-size: 9px; }
+.certificate-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 10px; margin-top: 34px; }
+.certificate-note { max-width: 480px; margin: 24px auto 0; color: #8a8174; font-size: 11px; line-height: 1.5; text-align: center; }
+@media print { .progress-header, .certificate-actions, .certificate-note { display: none; } .certificate-main { padding: 0; } .certificate-paper { width: 100%; box-shadow: none; } }
+@media (prefers-reduced-motion: reduce) { .badge-burst { animation: none; } }
+@media (max-width: 680px) { .certificate-paper { min-height: auto; padding: 32px 23px 29px; } .certificate-topline { font-size: 7px; } .certificate-paper h1 { font-size: 45px; } .certificate-signature { font-size: 14px; } }
+
+/* Study Desk Editorial testing card: quiet, optional feedback with clear tap targets. */
+.post-game-feedback { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin: 20px 0 16px; padding: 12px 14px; color: #71685d; background: var(--sage); font-size: 11px; }
+.feedback-choices { display: flex; flex-wrap: wrap; gap: 5px; }
+.feedback-choices button { padding: 6px 9px; color: var(--evergreen); border: 1px solid #a8bca8; background: transparent; font-size: 10px; }
+.feedback-choices button:hover { background: var(--paper-light); }
+.feedback-thanks { display: inline-flex; align-items: center; gap: 6px; color: var(--evergreen); font-size: 11px; }
+@media (max-width: 680px) { .post-game-feedback { align-items: flex-start; flex-direction: column; } }
