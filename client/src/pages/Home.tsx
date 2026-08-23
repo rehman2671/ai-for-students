@@ -75,7 +75,7 @@ function Header() {
           {navItems.map((item) => <a key={item} href={`#${item.toLowerCase().replaceAll(" ", "-")}`}>{item}</a>)}
         </nav>
         <div className="header-actions">
-          <a className="header-link" href="#newsletter">Join the desk <ArrowUpRight size={14} /></a>
+          <a className="header-link" href="/progress">Your progress <ArrowUpRight size={14} /></a>
           <button className="mobile-menu" onClick={() => setOpen(!open)} aria-label={open ? "Close menu" : "Open menu"}>
             {open ? <X size={21} /> : <Menu size={21} />}
           </button>
@@ -184,7 +184,7 @@ export default function Home() {
 
         <section className="newsletter-section" id="newsletter"><div className="container newsletter-layout"><div className="newsletter-symbol"><img src={markImage} alt="" /><span>INDEX TAB<br />EVERY WEEK</span></div><div className="newsletter-copy"><SectionLabel>THE DESK, IN YOUR INBOX</SectionLabel><h2>One useful AI idea.<br /><em>Every week.</em></h2><p>Join a small, thoughtful newsletter with one prompt, one workflow and one thing worth knowing. No noise.</p>{submitted ? <div className="success-box"><Check size={18} /><span>You're on the list. Check your inbox for the starter kit.</span></div> : <form onSubmit={submitNewsletter} className="newsletter-form"><input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Your email address" aria-label="Your email address" /><button type="submit" className="button button--ink">Join the desk <ArrowUpRight size={16} /></button></form>}<small>By subscribing, you agree to receive practical AI notes. Unsubscribe anytime.</small></div></div></section>
       </main>
-      <footer className="site-footer"><div className="container footer-inner"><div className="footer-brand"><img src={markImage} alt="" /><strong>AI for Students</strong><p>Learn the tool. Keep the thinking.</p></div><div className="footer-links"><a href="#learn-ai">Learn AI</a><a href="#study-with-ai">Study</a><a href="#prompts">Prompts</a><a href="#tools">Tools</a><a href="#newsletter">Newsletter</a></div><div className="footer-meta"><span>Made for curious minds.</span><span>© 2026 AI for Students</span></div></div></footer>
+      <footer className="site-footer"><div className="container footer-inner"><div className="footer-brand"><img src={markImage} alt="" /><strong>AI for Students</strong><p>Learn the tool. Keep the thinking.</p></div><div className="footer-links"><a href="#learn-ai">Learn AI</a><a href="#study-with-ai">Study</a><a href="#prompts">Prompts</a><a href="#tools">Tools</a><a href="#newsletter">Newsletter</a><a href="/progress">Progress</a></div><div className="footer-meta"><span>Made for curious minds.</span><span>© 2026 AI for Students</span></div></div></footer>
     </div>
   );
 }

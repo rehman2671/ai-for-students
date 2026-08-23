@@ -18,6 +18,12 @@ The visual system uses the same warm paper, ink, evergreen, sage, clay and saffr
 - `/play?demo` active gameplay state verified on a narrow mobile viewport.
 - Final-score double-counting issue was corrected before checkpoint.
 
+## Current expansion
+
+AI Safety Lab is now the third game, covering privacy, academic integrity, high-stakes information and digital harm. The game hub supports Prompt Detective, Fact Check Quest and AI Safety Lab. `/progress` provides a local-first dashboard with completion stats and badges.
+
+A shared `learningProgress.ts` helper stores attempts, completions, best score, last score and last played timestamp without identity data. `analytics.ts` forwards safe event names and non-identifying properties to the existing Umami integration. Tracked events include game start, answer, completion, exit and progress reset.
+
 ## Future work
 
-Add a dedicated answer-state interaction test, optional progress dashboard, more lesson packs and analytics events after the public content model is added. Keep question explanations human-reviewed.
+Add dedicated answer-state interaction tests, more reviewed lesson packs and optional account sync only after the local-first model proves useful. Keep all question explanations human-reviewed.

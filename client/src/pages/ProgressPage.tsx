@@ -1,0 +1,28 @@
+/* Study Desk Editorial progress page: private local progress, paper cards, useful milestones and no public leaderboard. */
+import { useState } from "react";
+import { ArrowLeft, ArrowRight, Award, BarChart3, Check, LockKeyhole, RotateCcw, Sparkles, Trophy } from "lucide-react";
+import { getLearningProgress, GameId, LearningProgress, resetLearningProgress } from "@/lib/learningProgress";
+import { trackLearningEvent } from "@/lib/analytics";
+
+const gameMeta: { id: GameId; label: string; note: string; total: number; href: string }[] = [
+  { id: "prompt-detective", label: "Prompt Detective", note: "Build better requests", total: 5, href: "/play" },
+  { id: "fact-check-quest", label: "Fact Check Quest", note: "Verify before you trust", total: 4, href: "/play?game=fact" },
+  { id: "ai-safety-lab", label: "AI Safety Lab", note: "Make the safer move", total: 4, href: "/play?game=safety" },
+];
+
+const badgeMeta = [
+  { id: "first", label: "First case", note: "Complete one learning game", icon: Sparkles },
+  { id: "detective", label: "Sharp eye", note: "Score 4/5 in Prompt Detective", icon: Trophy },
+  { id: "evidence", label: "Evidence finder", note: "Complete Fact Check Quest", icon: SearchIcon },
+  { id: "safety", label: "Safety first", note: "Complete AI Safety Lab", icon: LockKeyhole },
+  { id: "desk", label: "Desk regular", note: "Complete all three games", icon: Award },
+];
+function SearchIcon(props: { size?: number }) { return <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" width={props.size || 18} height={props.size || 18}><circle cx="11" cy="11" r="7" /><path d="m20 20-4-4" /><path d="M8.5 11h5" /></svg>; }
+
+export default function ProgressPage() {
+  const [progress, setProgress] = useState<LearningProgress>(() => getLearningProgress());
+  const completed = gameMeta.filter((game) => progress[game.id].completions > 0).length;
+  const totalAttempts = Object.values(progress).reduce((sum, game) => sum + game.attempts, 0);
+  const reset = () => { resetLearningProgress(); setProgress(getLearningProgress()); trackLearningEvent("learning_progress_reset"); };
+  return <div className="progress-page"><header className="progress-header"><a className="game-brand" href="/"><span className="progress-logo">✦</span><span><strong>AI</strong> for <em>Students</em></span></a><a className="game-return" href="/"><ArrowLeft size={15} /> Back to the desk</a></header><main className="progress-main"><div className="progress-top"><div><span className="game-kicker">YOUR LEARNING DESK</span><h1>Keep track of<br /><em>what is sticking.</em></h1><p>Your progress stays on this device. No account, no public scores—just a quiet record of the skills you have practiced.</p></div><div className="progress-stats"><div><strong>{completed}/3</strong><small>games complete</small></div><div><strong>{totalAttempts}</strong><small>sessions started</small></div></div></div><section className="dashboard-section"><div className="dashboard-section-head"><span className="game-kicker">THE SHELF / 01</span><h2>Learning<br /><em>in motion.</em></h2></div><div className="dashboard-games">{gameMeta.map((game) => { const item = progress[game.id]; return <a className="dashboard-game" href={game.href} key={game.id}><div className="dashboard-game-top"><span>{game.label}</span><BarChart3 size={16} /></div><strong>{item.bestScore}<small> / {game.total}</small></strong><p>{item.completions ? `${item.completions} completed · ${game.note}` : `Not started · ${game.note}`}</p><div className="dashboard-bar"><span style={{ width: `${Math.min(100, (item.bestScore / game.total) * 100)}%` }} /></div><span className="dashboard-action">{item.completions ? "Play again" : "Open game"} <ArrowRight size={14} /></span></a>; })}</div></section><section className="dashboard-section dashboard-badges"><div className="dashboard-section-head"><span className="game-kicker">THE PINBOARD / 02</span><h2>Small marks<br /><em>of progress.</em></h2></div><div className="badge-grid">{badgeMeta.map((badge) => { const earned = badge.id === "first" ? completed > 0 : badge.id === "detective" ? progress["prompt-detective"].bestScore >= 4 : badge.id === "evidence" ? progress["fact-check-quest"].completions > 0 : badge.id === "safety" ? progress["ai-safety-lab"].completions > 0 : completed === 3; const Icon = badge.icon; return <div className={`badge-card ${earned ? "is-earned" : ""}`} key={badge.id}><span className="badge-icon">{earned ? <Icon size={19} /> : <LockKeyhole size={17} />}</span><strong>{badge.label}</strong><small>{badge.note}</small>{earned && <span className="badge-earned"><Check size={12} /> Earned</span>}</div>; })}</div></section><div className="progress-footer-actions"><a className="text-link" href="/play"><ArrowLeft size={15} /> Back to learning games</a><button className="reset-progress" onClick={reset}><RotateCcw size={14} /> Reset local progress</button></div></main><footer className="game-page-footer"><span>AI for Students</span><span>Learn the tool. Keep the thinking.</span></footer></div>;
+}

@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { ArrowLeft, ArrowRight, Check, RotateCcw, Sparkles, X } from "lucide-react";
 import { toast } from "sonner";
 import { GameLesson, GameQuestion, lessons, questions } from "@/data/gameQuestions";
+import { completeGame, startGame } from "@/lib/learningProgress";
+import { trackLearningEvent } from "@/lib/analytics";
 
 const STORAGE_KEY = "ai-students-prompt-detective-best";
 
@@ -39,6 +41,8 @@ export default function PromptDetective() {
 
   const start = (selectedLesson: GameLesson) => {
     setLesson(selectedLesson);
+    startGame("prompt-detective");
+    trackLearningEvent("learning_game_start", { game: "prompt-detective", lesson: selectedLesson });
     setRound(pickQuestions(selectedLesson));
     setIndex(0);
     setScore(0);
@@ -49,6 +53,7 @@ export default function PromptDetective() {
     if (selected || !current) return;
     const choice = current.choices.find((item) => item.id === choiceId);
     setSelected(choiceId);
+    trackLearningEvent("learning_game_answer", { game: "prompt-detective", question: index + 1, correct: Boolean(choice?.correct) });
     if (choice?.correct) {
       setScore((value) => value + 1);
       toast.success("Good catch. Read the note below to see why.");
@@ -59,6 +64,8 @@ export default function PromptDetective() {
     if (!selected) return;
     if (index === round.length - 1) {
       const finalScore = score;
+      completeGame("prompt-detective", finalScore);
+      trackLearningEvent("learning_game_complete", { game: "prompt-detective", score: finalScore, total: round.length });
       if (finalScore > best) {
         setBest(finalScore);
         saveBest(finalScore);

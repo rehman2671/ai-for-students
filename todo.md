@@ -20,3 +20,13 @@
 - [ ] Add game selector and continuity between both games.
 - [ ] Verify mobile, keyboard, scoring and replay behavior.
 - [ ] Save a new checkpoint after production verification.
+
+## Learning platform expansion
+
+- [ ] Define privacy-conscious events for Prompt Detective and Fact Check Quest.
+- [ ] Create shared local progress storage and completion records.
+- [ ] Add AI Safety Lab reviewed scenarios and learning explanations.
+- [ ] Add third-game selector entry and route continuity.
+- [ ] Build learner progress dashboard with badges and empty states.
+- [ ] Verify mobile, keyboard, reduced motion and scoring flows.
+- [ ] Save a new checkpoint after full release verification.
