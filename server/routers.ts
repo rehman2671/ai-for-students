@@ -1,15 +1,25 @@
 import { COOKIE_NAME } from "@shared/const";
 import { z } from "zod";
+import { TRPCError } from "@trpc/server";
 import { deleteLearningProgressForUser, deleteUserAccount, getLearningProgressForUser, mergeGuestProgressForUser, saveLearningProgress } from "./db";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
+import { sendAuthenticationCode } from "./mail";
+import { canRequestEmailCode, createEmailCodeChallenge, verifyEmailCode, AUTH_EMAIL_CODE_COOKIE } from "./authEmail";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
+    requestEmailCode: publicProcedure.input(z.object({ email: z.string().email().max(320) })).mutation(async ({ ctx, input }) => {
+      if (!canRequestEmailCode(input.email)) throw new TRPCError({ code: "TOO_MANY_REQUESTS", message: "Please wait before requesting another code" });
+      const challenge = createEmailCodeChallenge(input.email, ctx.res);
+      await sendAuthenticationCode({ to: input.email, code: challenge.code, expiresInMinutes: challenge.expiresInMinutes });
+      return { success: true as const, expiresInMinutes: challenge.expiresInMinutes };
+    }),
+    verifyEmailCode: publicProcedure.input(z.object({ email: z.string().email().max(320), code: z.string().regex(/^\\d{6}$/) })).mutation(({ ctx, input }) => ({ success: verifyEmailCode(input.email, input.code, ctx.req.cookies?.[AUTH_EMAIL_CODE_COOKIE]) })),
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
       ctx.res.clearCookie(COOKIE_NAME, cookieOptions);

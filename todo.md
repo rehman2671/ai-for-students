@@ -171,3 +171,19 @@
 - [x] Add a visible filtered-result count and accessible clear-filters action to the game discovery controls.
 
 - [x] Guard discovery result-count and clear-filters affordances with an automated source contract.
+
+## Hostinger auth email integration
+
+- [x] Audit existing Manus OAuth and any email/OTP boundaries before adding a provider.
+- [x] Add provider-neutral server-side mail configuration with auth@aiforstudents.in as the sender.
+- [x] Request and securely configure the exact Hostinger API endpoint and credential names without exposing secrets.
+- [x] Implement an adapter without changing frontend auth or progress migration contracts.
+- [x] Add Vitest coverage for sender identity and payload mapping; failure handling is covered by adapter status errors.
+- [x] Validate the integration and save a checkpoint after secrets are configured.
+
+- [x] Wire the Hostinger adapter into a real server-side authentication-code procedure without changing existing guest/login progress contracts.
+- [x] Add a mocked auth-code procedure test proving the route calls the adapter and preserves privacy/rate-limit boundaries.
+
+- [x] Add server-side cooldown and bounded abuse protection to the email-code request procedure.
+- [x] Add privacy tests proving the API never returns the code and the challenge cookie is httpOnly.
+- [x] Save a new checkpoint after the completed Hostinger auth-code wiring and QA.
