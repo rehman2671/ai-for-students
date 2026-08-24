@@ -169,3 +169,5 @@
 - [x] Guard active field-game review-status labels with an automated source-contract test.
 
 - [x] Add a visible filtered-result count and accessible clear-filters action to the game discovery controls.
+
+- [x] Guard discovery result-count and clear-filters affordances with an automated source contract.

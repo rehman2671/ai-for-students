@@ -106,6 +106,9 @@ describe("learning progress access", () => {
     }
     expect(gamePage).toContain('<select');
     expect(gamePage).toContain('aria-label="Learning games"');
+    expect(gamePage).toContain('aria-label="Clear game filters"');
+    expect(gamePage).toContain('aria-live="polite"');
+    expect(gamePage).toContain("Showing {filteredGames.length} of {coreGames.length} learning games");
     expect(gamePage).toContain('href="/"');
   });
 
