@@ -187,3 +187,13 @@
 - [x] Add server-side cooldown and bounded abuse protection to the email-code request procedure.
 - [x] Add privacy tests proving the API never returns the code and the challenge cookie is httpOnly.
 - [x] Save a new checkpoint after the completed Hostinger auth-code wiring and QA.
+
+- [x] Diagnose why the observed accepted login code is sent from a Manus address instead of auth@aiforstudents.in.
+- [x] Correct the sender configuration or document the Manus OAuth sender limitation with evidence.
+- [x] Re-test the relevant email authentication path and save a checkpoint if code changes are required.
+
+## Hostinger deployment assessment
+
+- [x] Verify whether the Hostinger Agency Build Assets API deploys runtime code or only static build assets.
+- [x] Compare Hostinger Business shared hosting capabilities with this Node.js, Express, tRPC and MySQL/TiDB application.
+- [x] Recommend a same-server or split architecture without exposing API credentials or database secrets.
