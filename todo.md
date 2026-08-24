@@ -123,7 +123,7 @@
 - [x] Add dedicated topic and skill filter controls backed by distinct catalog metadata fields.
 - [x] Add automated count tests for both interactive labs and all field games.
 - [x] Run representative mobile visual, source-contract accessibility and replay regression verification for Safety, Fact Check, Prompt Detective and Source Hunt; broader live keyboard testing remains a human gate.
-- [ ] Produce facilitator evidence notes for the expanded content review.
+- [x] Produce facilitator evidence notes for autonomous structural checks; independent pedagogical approval remains pending.
 
 ## Answer-position bias remediation
 
