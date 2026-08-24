@@ -163,3 +163,5 @@
 - [x] Extend replay-seed regression coverage across Prompt Detective, Fact Check Quest, AI Safety Lab and all seven field games.
 
 - [x] Show field-game scenario review status in the active play view, not only in the introduction copy.
+
+- [x] Remove the deprecated clearCookie maxAge option from the auth logout path and revalidate the server tests.
