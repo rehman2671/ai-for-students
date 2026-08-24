@@ -201,9 +201,9 @@
 ## GitHub repository delivery
 
 - [x] Verify Git status, existing remotes and sensitive-file exclusions before publishing source.
-- [ ] Create a new private GitHub repository for the current project.
-- [ ] Commit the current project state and push it to the new repository.
-- [ ] Verify the pushed branch, commit and repository visibility.
+- [x] Create a new private GitHub repository for the current project.
+- [x] Commit the current project state and push it to the new repository.
+- [x] Verify the pushed branch, commit and repository visibility.
 
 - [x] Explicitly verify that environment patterns, build artifacts and dependency directories are ignored or untracked before the GitHub push.
 - [x] Re-run and document the combined publish preflight after the exclusion check passes.
