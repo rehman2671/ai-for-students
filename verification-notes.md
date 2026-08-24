@@ -31,3 +31,5 @@ Connected-browser self-check: the Safety Lab guest route loaded with all discove
 Representative field-game visual QA: `/play?game=bias-buster` rendered successfully at desktop width. The route showed the 12-module discovery grid, topic/skill/difficulty/age filters, a reachable Learning games escape link, and the explicit introduction that extended cases are marked for facilitator review. The active answer-level label remains covered by source contract and the field-game component implementation; no live answer selection was forced.
 
 Mobile field-game QA: `/play?game=bias-buster` at 375px rendered without horizontal overflow. Search, difficulty, age-band, topic and skill controls stack vertically; all 12 module cards remain reachable; the field-game introduction and facilitator-review disclosure remain readable; the Learning games escape link is visible.
+
+Mobile discovery QA: `/play` at 375px visibly shows “Showing 12 of 12 learning games” beneath the stacked search and four filter controls. The selected Prompt Detective card and subsequent module cards remain readable and reachable in the viewport.
