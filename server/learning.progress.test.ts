@@ -8,7 +8,9 @@ import { safetyQuestions } from "../client/src/components/game/AISafetyLab";
 import { moreGameCatalog } from "../client/src/components/game/MoreAIGames";
 import { challenges as interactiveLabChallenges } from "../client/src/components/game/InteractiveLab";
 import { gameCatalog } from "../client/src/data/gameCatalog";
-import { orderChoices } from "../client/src/lib/answerOrder";
+import { createRoundSeed, orderChoices } from "../client/src/lib/answerOrder";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
 import type { TrpcContext } from "./_core/context";
 
 const baseContext = (user?: TrpcContext["user"]): TrpcContext => ({
@@ -75,6 +77,55 @@ describe("learning progress access", () => {
     expect(secondRound).not.toEqual(firstRound);
     expect(firstRound.join("")).not.toBe("012012012012");
   });
+  it("audits field-game uniqueness and review-status transparency", () => {
+    for (const game of moreGameCatalog) {
+      const prompts = game.scenarios.map((scenario) => scenario.prompt);
+      expect(new Set(prompts).size).toBe(prompts.length);
+      const reviewStatuses = game.scenarios.map((scenario) => scenario.reviewStatus);
+      expect(reviewStatuses.every(Boolean)).toBe(true);
+      expect(reviewStatuses.filter((status) => status === "needs-facilitator-review").length).toBeGreaterThan(0);
+    }
+  });
+
+  it("keeps answer controls and route escape affordances in every choice game", () => {
+    const sources = ["PromptDetective.tsx", "FactCheckQuest.tsx", "AISafetyLab.tsx", "MoreAIGames.tsx"].map((file) => readFileSync(resolve(process.cwd(), "client/src/components/game", file), "utf8"));
+    for (const source of sources) {
+      expect(source).toContain("answer-card");
+      expect(source).toContain("disabled={Boolean(selected)}");
+      expect(source).toContain("game-back");
+      expect(source.includes('href="/play"') || source.includes('onClick={reset}')).toBe(true);
+      expect(source).toContain("onClick={() => choose");
+    }
+    const gamePage = readFileSync(resolve(process.cwd(), "client/src/pages/GamePage.tsx"), "utf8");
+    expect(gamePage).toContain('aria-label="Filter learning games"');
+    for (const label of ["Search games or skills", "Filter by difficulty", "Filter by age band", "Filter by topic", "Filter by skill"]) {
+      expect(gamePage).toContain(`aria-label="${label}"`);
+    }
+    expect(gamePage).toContain('<select');
+    expect(gamePage).toContain('aria-label="Learning games"');
+    expect(gamePage).toContain('href="/"');
+  });
+
+  it("covers stable and fresh replay ordering across every choice-based module", () => {
+    const banks = [
+      ...questions.slice(0, 6).map((item) => ({ choices: item.choices, id: item.id })),
+      ...factQuestions.slice(0, 6).map((item, index) => ({ choices: item.choices, id: item.id || `fact-${index}` })),
+      ...safetyQuestions.slice(0, 6).map((item) => ({ choices: item.choices, id: item.scenario })),
+      ...moreGameCatalog.flatMap((game) => game.scenarios.slice(0, 2).map((item) => ({ choices: item.choices, id: `${game.id}:${item.prompt}` }))),
+    ];
+    const firstSeed = createRoundSeed();
+    const secondSeed = createRoundSeed();
+    expect(firstSeed).not.toBe(secondSeed);
+    for (const item of banks) {
+      const first = orderChoices(item.choices, firstSeed, item.id);
+      const stable = orderChoices(item.choices, firstSeed, item.id);
+      const replay = orderChoices(item.choices, secondSeed, item.id);
+      expect(stable).toEqual(first);
+      expect(replay).toHaveLength(item.choices.length);
+      expect(new Set(replay.map((choice) => choice.id))).toEqual(new Set(item.choices.map((choice) => choice.id)));
+    }
+  });
+
   it("requires an authenticated user to read progress", async () => {
     const caller = appRouter.createCaller(baseContext());
     await expect(caller.learning.list()).rejects.toMatchObject({ code: "UNAUTHORIZED" });

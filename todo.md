@@ -149,3 +149,15 @@
 - [x] Run visual and production validation, then save a new checkpoint.
 
 - [x] Save a checkpoint after the replay-seed hardening and final validation run.
+
+## Next autonomous quality pass
+
+- [x] Add a deterministic content-audit report for field-game scenario uniqueness and review-status coverage.
+- [x] Add automated accessibility-contract checks for answer buttons, filters and route escape links.
+- [x] Add replay-flow regression coverage for fresh answer-order seeds across all choice-based modules.
+
+## QA contract corrections
+
+- [x] Create a deterministic field-game content-audit artifact with per-game counts and review-status totals.
+- [x] Add static accessibility source-contract checks for GamePage filter names, native selects and route escape controls.
+- [x] Extend replay-seed regression coverage across Prompt Detective, Fact Check Quest, AI Safety Lab and all seven field games.
