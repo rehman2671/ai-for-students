@@ -8,6 +8,7 @@ import { safetyQuestions } from "../client/src/components/game/AISafetyLab";
 import { moreGameCatalog } from "../client/src/components/game/MoreAIGames";
 import { challenges as interactiveLabChallenges } from "../client/src/components/game/InteractiveLab";
 import { gameCatalog } from "../client/src/data/gameCatalog";
+import { orderChoices } from "../client/src/lib/answerOrder";
 import type { TrpcContext } from "./_core/context";
 
 const baseContext = (user?: TrpcContext["user"]): TrpcContext => ({
@@ -28,8 +29,15 @@ describe("learning progress access", () => {
       expect(item.difficulty).toBeTruthy();
       expect(item.ageBand).toBeTruthy();
     }
-    expect(interactiveLabChallenges.workshop.length).toBeGreaterThanOrEqual(30);
-    expect(interactiveLabChallenges["source-hunt"].length).toBeGreaterThanOrEqual(30);
+    for (const lab of [interactiveLabChallenges.workshop, interactiveLabChallenges["source-hunt"]]) {
+      expect(lab.length).toBeGreaterThanOrEqual(30);
+      for (const challenge of lab) {
+        expect(challenge.blocks.length).toBeGreaterThanOrEqual(4);
+        expect(challenge.correct.length).toBeGreaterThanOrEqual(3);
+        expect(new Set(challenge.correct).size).toBe(challenge.correct.length);
+        expect(challenge.correct.every((block) => challenge.blocks.includes(block))).toBe(true);
+      }
+    }
     expect(moreGameCatalog).toHaveLength(7);
     for (const game of moreGameCatalog) {
       expect(game.scenarios.length).toBeGreaterThanOrEqual(30);
@@ -38,6 +46,21 @@ describe("learning progress access", () => {
         expect(scenario.choices.length).toBeGreaterThanOrEqual(3);
         expect(scenario.choices.filter((choice) => choice.correct)).toHaveLength(1);
       }
+    }
+  });
+  it("distributes rendered correct answers across all visible option positions", () => {
+    const banks = [
+      { name: "prompt detective", items: questions.map((item) => ({ choices: item.choices, seed: item.id })) },
+      { name: "fact check quest", items: factQuestions.map((item, index) => ({ choices: item.choices, seed: `fact-check-${index}` })) },
+      { name: "ai safety lab", items: safetyQuestions.map((item, index) => ({ choices: item.choices, seed: `ai-safety-${index}` })) },
+      ...moreGameCatalog.map((game) => ({ name: game.id, items: game.scenarios.map((item, index) => ({ choices: item.choices, seed: `${game.id}-${index}` })) })),
+    ];
+    expect(banks).toHaveLength(10);
+    for (const bank of banks) {
+      const positions = bank.items.map(({ choices, seed }) => orderChoices(choices, seed).findIndex((choice) => choice.correct));
+      expect(new Set(positions)).toEqual(new Set([0, 1, 2]));
+      const maxShare = Math.max(...[0, 1, 2].map((position) => positions.filter((value) => value === position).length / positions.length));
+      expect(maxShare).toBeLessThan(0.6);
     }
   });
   it("requires an authenticated user to read progress", async () => {

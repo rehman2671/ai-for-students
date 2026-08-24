@@ -124,3 +124,12 @@
 - [x] Add automated count tests for both interactive labs and all field games.
 - [ ] Run mobile, keyboard, accessibility and replay verification across the expanded library.
 - [ ] Produce facilitator evidence notes for the expanded content review.
+
+## Answer-position bias remediation
+
+- [x] Audit correct-answer positions across all quiz, lab and field-game banks.
+- [x] Add regression tests preventing fixed-option guessing from earning inflated scores.
+- [x] Rebalance rendered answer positions while preserving correctness, explanations and review metadata.
+- [x] Verify third-option availability and answer-position diversity in every playable module.
+- [ ] Replay AI Safety Lab and representative core, lab and field-game flows after repair.
+- [ ] Save a checkpoint after the anti-bias repair and validation.
