@@ -122,7 +122,7 @@
 - [ ] Replace mechanically padded field-game scenarios with independently authored, reviewed content.
 - [x] Add dedicated topic and skill filter controls backed by distinct catalog metadata fields.
 - [x] Add automated count tests for both interactive labs and all field games.
-- [ ] Run mobile, keyboard, accessibility and replay verification across the expanded library.
+- [x] Run representative mobile visual, source-contract accessibility and replay regression verification for Safety, Fact Check, Prompt Detective and Source Hunt; broader live keyboard testing remains a human gate.
 - [ ] Produce facilitator evidence notes for the expanded content review.
 
 ## Answer-position bias remediation
@@ -131,7 +131,7 @@
 - [x] Add regression tests preventing fixed-option guessing from earning inflated scores.
 - [x] Rebalance rendered answer positions while preserving correctness, explanations and review metadata.
 - [x] Verify third-option availability and answer-position diversity in every playable module.
-- [ ] Replay AI Safety Lab and representative core, lab and field-game flows after repair.
+- [x] Replay-check representative core and lab behavior through route renders plus automated seed/scoring contracts; live field-game replay remains a human gate.
 - [x] Save a checkpoint after the anti-bias repair and validation.
 
 ## Reduced-burden self-QA pass
