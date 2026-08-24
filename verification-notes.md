@@ -15,3 +15,5 @@ Anti-bias repair checkpoint: added stable identity-based rotation of answer choi
 The anti-bias regression suite now passes 10 tests: all eight choice-based game banks distribute correct answers across positions 0, 1 and 2 with no position exceeding 60%; Prompt Workshop and Source Hunt are verified as sequence games with valid ordered blocks rather than fixed-position multiple-choice quizzes. TypeScript checking and production build also pass after wiring deterministic answer ordering into every choice-based module.
 
 Direct post-fix screenshots confirm answer-position diversity in the three core quiz routes: AI Safety Lab's first correct answer appears as B, Fact Check Quest's as C, and Prompt Detective's first correct answer appears as B. This directly addresses the reported “25/30 by always choosing option one” failure mode.
+
+The new regression explicitly simulates selecting only the first visible answer for every choice-based bank. It passes with a score share below 60% for every bank, alongside full A/B/C position coverage; this is a direct guard against the reported 25/30 shortcut.

@@ -61,6 +61,8 @@ describe("learning progress access", () => {
       expect(new Set(positions)).toEqual(new Set([0, 1, 2]));
       const maxShare = Math.max(...[0, 1, 2].map((position) => positions.filter((value) => value === position).length / positions.length));
       expect(maxShare).toBeLessThan(0.6);
+      const firstOptionScore = positions.filter((position) => position === 0).length;
+      expect(firstOptionScore / positions.length).toBeLessThan(0.6);
     }
   });
   it("requires an authenticated user to read progress", async () => {
