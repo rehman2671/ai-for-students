@@ -167,3 +167,5 @@
 - [x] Remove the deprecated clearCookie maxAge option from the auth logout path and revalidate the server tests.
 
 - [x] Guard active field-game review-status labels with an automated source-contract test.
+
+- [x] Add a visible filtered-result count and accessible clear-filters action to the game discovery controls.
