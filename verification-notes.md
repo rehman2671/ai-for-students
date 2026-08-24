@@ -17,3 +17,7 @@ The anti-bias regression suite now passes 10 tests: all eight choice-based game 
 Direct post-fix screenshots confirm answer-position diversity in the three core quiz routes: AI Safety Lab's first correct answer appears as B, Fact Check Quest's as C, and Prompt Detective's first correct answer appears as B. This directly addresses the reported “25/30 by always choosing option one” failure mode.
 
 The new regression explicitly simulates selecting only the first visible answer for every choice-based bank. It passes with a score share below 60% for every bank, alongside full A/B/C position coverage; this is a direct guard against the reported 25/30 shortcut.
+
+Reduced-burden visual pass: /play renders all 12 modules and topic/skill/level/age filters; Safety Lab, Fact Check Quest and Prompt Detective demo routes render 30-case playable views with three visible choices. The post-fix screenshots show Safety's correct option at B, Fact Check's at C and Prompt Detective's at B. No layout or stale fifteen-case copy was found in the source scan.
+
+Self-QA limits: this pass does not fabricate real student difficulty evidence, independent facilitator approval of the pilot field-game extensions, or a second-browser authenticated OAuth migration/sync result. Those require either real participants/reviewers or user-controlled account credentials. Guest routes, demo routes, source contracts, answer ordering, tests, build and visual rendering were verified autonomously.

@@ -132,4 +132,10 @@
 - [x] Rebalance rendered answer positions while preserving correctness, explanations and review metadata.
 - [x] Verify third-option availability and answer-position diversity in every playable module.
 - [ ] Replay AI Safety Lab and representative core, lab and field-game flows after repair.
-- [ ] Save a checkpoint after the anti-bias repair and validation.
+- [x] Save a checkpoint after the anti-bias repair and validation.
+
+## Reduced-burden self-QA pass
+
+- [x] Run one concise automated/source audit covering answer bias, twelve-module counts, metadata and build health.
+- [x] Run one concise visual pass covering the game hub, Safety Lab and representative quiz routes.
+- [x] Record the self-QA results and only unavoidable limits without requiring lengthy manual work from the user.
