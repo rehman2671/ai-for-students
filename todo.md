@@ -147,3 +147,5 @@
 - [x] Add regression checks for recurring answer-position sequences and fixed-option score inflation.
 - [x] Verify scoring and explanations still use answer IDs after shuffling.
 - [x] Run visual and production validation, then save a new checkpoint.
+
+- [x] Save a checkpoint after the replay-seed hardening and final validation run.
