@@ -161,3 +161,5 @@
 - [x] Create a deterministic field-game content-audit artifact with per-game counts and review-status totals.
 - [x] Add static accessibility source-contract checks for GamePage filter names, native selects and route escape controls.
 - [x] Extend replay-seed regression coverage across Prompt Detective, Fact Check Quest, AI Safety Lab and all seven field games.
+
+- [x] Show field-game scenario review status in the active play view, not only in the introduction copy.
