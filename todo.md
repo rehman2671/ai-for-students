@@ -197,3 +197,13 @@
 - [x] Verify whether the Hostinger Agency Build Assets API deploys runtime code or only static build assets.
 - [x] Compare Hostinger Business shared hosting capabilities with this Node.js, Express, tRPC and MySQL/TiDB application.
 - [x] Recommend a same-server or split architecture without exposing API credentials or database secrets.
+
+## GitHub repository delivery
+
+- [x] Verify Git status, existing remotes and sensitive-file exclusions before publishing source.
+- [ ] Create a new private GitHub repository for the current project.
+- [ ] Commit the current project state and push it to the new repository.
+- [ ] Verify the pushed branch, commit and repository visibility.
+
+- [x] Explicitly verify that environment patterns, build artifacts and dependency directories are ignored or untracked before the GitHub push.
+- [x] Re-run and document the combined publish preflight after the exclusion check passes.
