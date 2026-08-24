@@ -57,13 +57,23 @@ describe("learning progress access", () => {
     ];
     expect(banks).toHaveLength(10);
     for (const bank of banks) {
-      const positions = bank.items.map(({ choices, seed }) => orderChoices(choices, seed).findIndex((choice) => choice.correct));
+      const positions = bank.items.map(({ choices, seed }) => orderChoices(choices, seed, seed).findIndex((choice) => choice.correct));
       expect(new Set(positions)).toEqual(new Set([0, 1, 2]));
       const maxShare = Math.max(...[0, 1, 2].map((position) => positions.filter((value) => value === position).length / positions.length));
       expect(maxShare).toBeLessThan(0.6);
       const firstOptionScore = positions.filter((position) => position === 0).length;
       expect(firstOptionScore / positions.length).toBeLessThan(0.6);
     }
+  });
+  it("does not reuse a predictable answer-position cycle between rounds", () => {
+    const sample = safetyQuestions.slice(0, 12);
+    const firstRound = sample.map((item, index) => orderChoices(item.choices, "round-alpha", item.scenario).findIndex((choice) => choice.correct));
+    const sameRound = sample.map((item, index) => orderChoices(item.choices, "round-alpha", item.scenario).findIndex((choice) => choice.correct));
+    const secondRound = sample.map((item) => orderChoices(item.choices, "round-beta", item.scenario).findIndex((choice) => choice.correct));
+    expect(sameRound).toEqual(firstRound);
+    expect(new Set(firstRound)).toEqual(new Set([0, 1, 2]));
+    expect(secondRound).not.toEqual(firstRound);
+    expect(firstRound.join("")).not.toBe("012012012012");
   });
   it("requires an authenticated user to read progress", async () => {
     const caller = appRouter.createCaller(baseContext());

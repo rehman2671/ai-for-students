@@ -139,3 +139,11 @@
 - [x] Run one concise automated/source audit covering answer bias, twelve-module counts, metadata and build health.
 - [x] Run one concise visual pass covering the game hub, Safety Lab and representative quiz routes.
 - [x] Record the self-QA results and only unavoidable limits without requiring lengthy manual work from the user.
+
+## Stronger anti-pattern answer ordering
+
+- [x] Replace fixed hash rotation with a session-seeded unbiased shuffle for every choice-based question.
+- [x] Ensure the session seed is stable during a round but changes between new rounds.
+- [x] Add regression checks for recurring answer-position sequences and fixed-option score inflation.
+- [x] Verify scoring and explanations still use answer IDs after shuffling.
+- [x] Run visual and production validation, then save a new checkpoint.

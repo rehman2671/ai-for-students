@@ -5,7 +5,7 @@ import { toast } from "sonner";
 import { GameLesson, GameQuestion, lessons, questions } from "@/data/gameQuestions";
 import { completeGame, startGame } from "@/lib/learningProgress";
 import { trackLearningEvent } from "@/lib/analytics";
-import { orderChoices } from "@/lib/answerOrder";
+import { createRoundSeed, orderChoices } from "@/lib/answerOrder";
 import PostGameFeedback from "@/components/game/PostGameFeedback";
 import ShareResult from "@/components/game/ShareResult";
 
@@ -33,13 +33,14 @@ export default function PromptDetective() {
   const [score, setScore] = useState(0);
   const [selected, setSelected] = useState<string | null>(null);
   const [best, setBest] = useState(loadBest);
+  const [roundSeed, setRoundSeed] = useState(() => createRoundSeed());
 
   useEffect(() => {
     if (typeof window !== "undefined" && new URLSearchParams(window.location.search).has("demo")) start("clarity");
   }, []);
 
   const current = round[index];
-  const orderedChoices = current ? orderChoices(current.choices, current.id) : [];
+  const orderedChoices = current ? orderChoices(current.choices, roundSeed, current.id) : [];
   const progress = round.length ? ((index + (selected ? 1 : 0)) / round.length) * 100 : 0;
   const correctChoice = orderedChoices.find((choice) => choice.correct);
 
@@ -51,6 +52,7 @@ export default function PromptDetective() {
     setIndex(0);
     setScore(0);
     setSelected(null);
+    setRoundSeed(createRoundSeed());
   };
 
   const choose = (choiceId: string) => {

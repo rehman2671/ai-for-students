@@ -3,7 +3,7 @@ import { ArrowLeft, ArrowRight, Check, RotateCcw, Sparkles, X } from "lucide-rea
 import { reviewedMeta } from "@/data/contentSchema";
 import { completeGame, GameId, startGame } from "@/lib/learningProgress";
 import { trackLearningEvent } from "@/lib/analytics";
-import { orderChoices } from "@/lib/answerOrder";
+import { createRoundSeed, orderChoices } from "@/lib/answerOrder";
 import ShareResult from "@/components/game/ShareResult";
 
 type Choice = { id: string; text: string; correct: boolean; explanation: string };
@@ -64,11 +64,11 @@ export const moreGameCatalog: MoreGameDefinition[] = baseMoreGameCatalog.map((ga
 
 export default function MoreAIGame({ gameId }: { gameId: GameId }) {
   const game = moreGameCatalog.find((item) => item.id === gameId) || moreGameCatalog[0];
-  const [started, setStarted] = useState(false); const [index, setIndex] = useState(0); const [score, setScore] = useState(0); const [selected, setSelected] = useState<string | null>(null);
+  const [started, setStarted] = useState(false); const [index, setIndex] = useState(0); const [score, setScore] = useState(0); const [selected, setSelected] = useState<string | null>(null); const [roundSeed, setRoundSeed] = useState(() => createRoundSeed());
   const current = game.scenarios[index];
-  const orderedChoices = orderChoices(current.choices, `${game.id}-${index}`);
+  const orderedChoices = orderChoices(current.choices, roundSeed, `${game.id}-${current.prompt}`);
   const choose = (id: string) => { if (selected) return; setSelected(id); const item = current.choices.find((choice) => choice.id === id); if (item?.correct) setScore((value) => value + 1); trackLearningEvent("learning_game_answer", { game: game.id, question: index + 1, correct: Boolean(item?.correct) }); };
-  const start = () => { setStarted(true); setIndex(0); setScore(0); setSelected(null); startGame(game.id); trackLearningEvent("learning_game_start", { game: game.id }); };
+  const start = () => { setStarted(true); setIndex(0); setScore(0); setSelected(null); setRoundSeed(createRoundSeed()); startGame(game.id); trackLearningEvent("learning_game_start", { game: game.id }); };
   const next = () => { if (!selected) return; if (index === game.scenarios.length - 1) { const finalScore = score; completeGame(game.id, finalScore); trackLearningEvent("learning_game_complete", { game: game.id, score: finalScore, total: game.scenarios.length }); setIndex(game.scenarios.length); } else { setIndex((value) => value + 1); setSelected(null); } };
   if (!started) return <div className="game-picker"><a className="game-back game-hub-back" href="/play"><ArrowLeft size={15} /> Learning games</a><div className="game-picker-heading"><span className="game-kicker">{game.label.toUpperCase()} / {game.kicker}</span><h2>{game.tagline.split(" ").slice(0, 2).join(" ")}<br /><em>{game.tagline.split(" ").slice(2).join(" ")}</em></h2><p>Thirty AI practice cases with an explanation after every move. The extended cases are marked for facilitator review.</p></div><button className="game-button game-button--primary fact-start" onClick={start}>Start the field game <ArrowRight size={16} /></button></div>;
   if (index >= game.scenarios.length) return <div className="game-result"><div className="result-mark badge-burst"><Sparkles size={26} /></div><span className="game-kicker">{game.label.toUpperCase()} COMPLETE</span><h2>{score}<small> / {game.scenarios.length}</small></h2><p className="result-message">You practiced a useful AI habit through a real decision, not a definition.</p><ShareResult game={game.id} score={score} total={game.scenarios.length} /><div className="game-result-actions"><button className="game-button game-button--primary" onClick={start}><RotateCcw size={16} /> Play again</button><a className="game-button game-button--quiet" href="/play">Choose another game</a></div></div>;
