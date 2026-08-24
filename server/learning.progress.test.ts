@@ -96,6 +96,9 @@ describe("learning progress access", () => {
       expect(source.includes('href="/play"') || source.includes('onClick={reset}')).toBe(true);
       expect(source).toContain("onClick={() => choose");
     }
+    const fieldGameSource = readFileSync(resolve(process.cwd(), "client/src/components/game/MoreAIGames.tsx"), "utf8");
+    expect(fieldGameSource).toContain("PILOT CASE / FACILITATOR REVIEW NEEDED");
+    expect(fieldGameSource).toContain("REVIEWED CASE");
     const gamePage = readFileSync(resolve(process.cwd(), "client/src/pages/GamePage.tsx"), "utf8");
     expect(gamePage).toContain('aria-label="Filter learning games"');
     for (const label of ["Search games or skills", "Filter by difficulty", "Filter by age band", "Filter by topic", "Filter by skill"]) {
