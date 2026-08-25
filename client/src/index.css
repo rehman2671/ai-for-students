@@ -564,3 +564,17 @@ h1 span, h2 em { color: var(--evergreen); font-style: italic; font-weight: 500; 
 .game-filters input, .game-filters select { min-height: 42px; padding: 0 12px; border: 1px solid var(--line); background: var(--paper-light); color: var(--ink); font: inherit; }
 .game-filters input:focus, .game-filters select:focus { outline: 2px solid var(--saffron); outline-offset: 2px; }
 @media (max-width: 680px) { .game-filters { grid-template-columns: 1fr; } }
+
+.auth-modal-backdrop { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 20px; background: rgba(24,61,53,.48); }
+.auth-modal { position: relative; width: min(100%, 470px); padding: 34px; color: var(--ink); background: var(--paper-light); border: 1px solid var(--line); box-shadow: 12px 12px 0 rgba(231,168,59,.72); }
+.auth-modal h2 { margin-top: 15px; font-size: clamp(30px, 6vw, 44px); line-height: .98; }
+.auth-modal p { margin: 17px 0 22px; color: #5b554c; font-size: 14px; line-height: 1.6; }
+.auth-modal label { display: block; margin: 13px 0 7px; color: var(--evergreen); font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.auth-modal input { width: 100%; padding: 12px 13px; color: var(--ink); background: var(--paper); border: 1px solid var(--line); }
+.auth-modal .button { width: 100%; margin-top: 18px; }
+.auth-modal-close { position: absolute; top: 14px; right: 14px; display: grid; place-items: center; width: 32px; height: 32px; color: var(--evergreen); background: transparent; border: 1px solid var(--line); border-radius: 50%; }
+.auth-modal-divider { display: flex; align-items: center; gap: 10px; margin: 22px 0 13px; color: #81786c; font-size: 11px; text-transform: uppercase; }
+.auth-modal-divider::before, .auth-modal-divider::after { content: ""; height: 1px; flex: 1; background: var(--line); }
+.auth-modal-divider span { padding: 0 5px; }
+.auth-modal .text-link { background: transparent; }
+@media (max-width: 560px) { .auth-modal { padding: 28px 22px; box-shadow: 7px 7px 0 rgba(231,168,59,.72); } }

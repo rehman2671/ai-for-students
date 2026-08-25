@@ -1,8 +1,17 @@
-import { createHmac, randomInt, timingSafeEqual } from "node:crypto";
+import { createHash, createHmac, randomInt, timingSafeEqual } from "node:crypto";
 import type { Response } from "express";
 import { ENV } from "./_core/env";
 
 export const AUTH_EMAIL_CODE_COOKIE = "ai_students_email_challenge";
+
+export function normalizeEmail(email: string) {
+  return email.trim().toLowerCase();
+}
+
+/** Stable local identity that does not put the learner's email in the openId column. */
+export function localEmailOpenId(email: string) {
+  return `email:${createHash("sha256").update(normalizeEmail(email)).digest("hex").slice(0, 56)}`;
+}
 const CODE_TTL_MS = 10 * 60 * 1000;
 const REQUEST_COOLDOWN_MS = 30 * 1000;
 const recentRequests = new Map<string, number>();
@@ -19,10 +28,11 @@ function digest(email: string, code: string) {
 }
 
 export function canRequestEmailCode(email: string) {
+  const normalizedEmail = normalizeEmail(email);
   const now = Date.now();
-  const previous = recentRequests.get(email);
+  const previous = recentRequests.get(normalizedEmail);
   if (previous && now - previous < REQUEST_COOLDOWN_MS) return false;
-  recentRequests.set(email, now);
+  recentRequests.set(normalizedEmail, now);
   recentRequests.forEach((timestamp, key) => {
     if (now - timestamp > CODE_TTL_MS) recentRequests.delete(key);
   });
@@ -30,8 +40,9 @@ export function canRequestEmailCode(email: string) {
 }
 
 export function createEmailCodeChallenge(email: string, response: Response) {
+  const normalizedEmail = normalizeEmail(email);
   const code = String(randomInt(100000, 1000000));
-  const challenge: Challenge = { email, digest: digest(email, code), expiresAt: Date.now() + CODE_TTL_MS };
+  const challenge: Challenge = { email: normalizedEmail, digest: digest(normalizedEmail, code), expiresAt: Date.now() + CODE_TTL_MS };
   response.cookie(AUTH_EMAIL_CODE_COOKIE, Buffer.from(JSON.stringify(challenge)).toString("base64url"), {
     httpOnly: true,
     sameSite: "none",
@@ -43,14 +54,19 @@ export function createEmailCodeChallenge(email: string, response: Response) {
 }
 
 export function verifyEmailCode(email: string, code: string, cookieValue?: string) {
+  const normalizedEmail = normalizeEmail(email);
   if (!cookieValue) return false;
   try {
     const challenge = JSON.parse(Buffer.from(cookieValue, "base64url").toString("utf8")) as Challenge;
-    if (challenge.email !== email || challenge.expiresAt < Date.now()) return false;
+    if (challenge.email !== normalizedEmail || challenge.expiresAt < Date.now()) return false;
     const expected = Buffer.from(challenge.digest, "hex");
-    const actual = Buffer.from(digest(email, code), "hex");
+    const actual = Buffer.from(digest(normalizedEmail, code), "hex");
     return expected.length === actual.length && timingSafeEqual(expected, actual);
   } catch {
     return false;
   }
+}
+
+export function clearEmailCodeChallenge(response: Response) {
+  response.clearCookie(AUTH_EMAIL_CODE_COOKIE, { path: "/", secure: true, sameSite: "none" });
 }

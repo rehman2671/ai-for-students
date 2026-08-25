@@ -207,3 +207,24 @@
 
 - [x] Explicitly verify that environment patterns, build artifacts and dependency directories are ignored or untracked before the GitHub push.
 - [x] Re-run and document the combined publish preflight after the exclusion check passes.
+
+## Hostinger migration readiness
+
+- [ ] Inventory every production dependency that is tied to Manus services, current database, storage and OAuth.
+- [ ] Decide whether Manus OAuth remains temporarily available or is replaced by Hostinger Mail OTP before migration.
+- [ ] Prepare a migration checklist for database, secrets, storage, domain, email and authentication cutover.
+- [ ] Identify the user-owned actions required in Hostinger hPanel and the tests required after cutover.
+
+## Hostinger-independent primary authentication
+
+- [x] Define the local OTP identity/session contract while preserving Manus OAuth fallback.
+- [x] Connect OTP verification to user create/lookup, signed session issuance and existing logout behavior.
+- [x] Preserve guest-progress migration and add regression coverage for the local login path.
+- [x] Add the frontend OTP entry/verification flow without blocking guest play.
+- [x] Document the Hostinger production environment and migration cutover steps.
+
+- [x] Add an integration test proving a verified local OTP session can access protected learning procedures and preserve guest-progress merge behavior.
+- [x] Add a browser-level verification note for local OTP auth-state refresh and guest-progress synchronization.
+
+- [x] Build an end-to-end server integration test that reconstructs authenticated context from the session cookie returned by local OTP verification.
+- [ ] Perform the real HTTPS browser OTP and guest-progress sync test after Hostinger mail and database are configured; keep this pending until user-owned staging access exists.

@@ -1,12 +1,15 @@
 import { COOKIE_NAME } from "@shared/const";
+import { ONE_YEAR_MS } from "@shared/const";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
+import * as db from "./db";
 import { deleteLearningProgressForUser, deleteUserAccount, getLearningProgressForUser, mergeGuestProgressForUser, saveLearningProgress } from "./db";
 import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
+import { sdk } from "./_core/sdk";
 import { sendAuthenticationCode } from "./mail";
-import { canRequestEmailCode, createEmailCodeChallenge, verifyEmailCode, AUTH_EMAIL_CODE_COOKIE } from "./authEmail";
+import { AUTH_EMAIL_CODE_COOKIE, canRequestEmailCode, clearEmailCodeChallenge, createEmailCodeChallenge, localEmailOpenId, normalizeEmail, verifyEmailCode } from "./authEmail";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
@@ -19,7 +22,21 @@ export const appRouter = router({
       await sendAuthenticationCode({ to: input.email, code: challenge.code, expiresInMinutes: challenge.expiresInMinutes });
       return { success: true as const, expiresInMinutes: challenge.expiresInMinutes };
     }),
-    verifyEmailCode: publicProcedure.input(z.object({ email: z.string().email().max(320), code: z.string().regex(/^\\d{6}$/) })).mutation(({ ctx, input }) => ({ success: verifyEmailCode(input.email, input.code, ctx.req.cookies?.[AUTH_EMAIL_CODE_COOKIE]) })),
+    verifyEmailCode: publicProcedure.input(z.object({ email: z.string().email().max(320), code: z.string().regex(/^\d{6}$/) })).mutation(async ({ ctx, input }) => {
+      const email = normalizeEmail(input.email);
+      const verified = verifyEmailCode(email, input.code, ctx.req.cookies?.[AUTH_EMAIL_CODE_COOKIE]);
+      if (!verified) return { success: false as const };
+
+      const openId = localEmailOpenId(email);
+      await db.upsertUser({ openId, email, name: email.split("@")[0] || null, loginMethod: "email-otp", lastSignedIn: new Date() });
+      const user = await db.getUserByOpenId(openId);
+      if (!user) throw new TRPCError({ code: "INTERNAL_SERVER_ERROR", message: "Account could not be loaded" });
+
+      const sessionToken = await sdk.createSessionToken(openId, { name: user.name || email, expiresInMs: ONE_YEAR_MS });
+      ctx.res.cookie(COOKIE_NAME, sessionToken, { ...getSessionCookieOptions(ctx.req), maxAge: ONE_YEAR_MS });
+      clearEmailCodeChallenge(ctx.res);
+      return { success: true as const };
+    }),
     logout: publicProcedure.mutation(({ ctx }) => {
       const cookieOptions = getSessionCookieOptions(ctx.req);
       ctx.res.clearCookie(COOKIE_NAME, cookieOptions);

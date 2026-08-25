@@ -1,12 +1,22 @@
 import { describe, expect, it, vi } from "vitest";
 
-const { sendAuthenticationCode } = vi.hoisted(() => ({ sendAuthenticationCode: vi.fn().mockResolvedValue(undefined) }));
+const { sendAuthenticationCode, upsertUser, getUserByOpenId, getLearningProgressForUser, mergeGuestProgressForUser, createSessionToken } = vi.hoisted(() => ({
+  sendAuthenticationCode: vi.fn().mockResolvedValue(undefined),
+  upsertUser: vi.fn().mockResolvedValue(undefined),
+  getUserByOpenId: vi.fn().mockResolvedValue({ id: 7, openId: "email:test", name: "Learner", email: "learner@example.com", role: "user" }),
+  getLearningProgressForUser: vi.fn().mockResolvedValue([]),
+  mergeGuestProgressForUser: vi.fn().mockResolvedValue(undefined),
+  createSessionToken: vi.fn().mockResolvedValue("signed-local-session"),
+}));
 vi.mock("./mail", () => ({ sendAuthenticationCode }));
+vi.mock("./db", () => ({ upsertUser, getUserByOpenId, getLearningProgressForUser, mergeGuestProgressForUser }));
+vi.mock("./_core/sdk", () => ({ sdk: { createSessionToken } }));
 
+import { COOKIE_NAME } from "@shared/const";
 import { appRouter } from "./routers";
 
-const createContext = () => ({
-  req: { cookies: {} } as never,
+const createContext = (cookies: Record<string, string> = {}) => ({
+  req: { cookies, protocol: "https", headers: { "x-forwarded-proto": "https" } } as never,
   res: { cookie: vi.fn(), clearCookie: vi.fn() } as never,
   user: null,
 });
@@ -35,6 +45,33 @@ describe("auth email-code procedure", () => {
     const caller = appRouter.createCaller(createContext());
     await caller.auth.requestEmailCode({ email: "privacy@example.com" });
     await expect(caller.auth.requestEmailCode({ email: "privacy@example.com" })).rejects.toMatchObject({ code: "TOO_MANY_REQUESTS" });
+  });
+
+  it("creates a local session after a valid code and clears the one-time challenge", async () => {
+    const requestContext = createContext();
+    const requestCaller = appRouter.createCaller(requestContext);
+    await requestCaller.auth.requestEmailCode({ email: "session@example.com" });
+    const challengeCookie = (requestContext.res as { cookie: ReturnType<typeof vi.fn> }).cookie.mock.calls[0][1] as string;
+    const verifyContext = createContext({ ai_students_email_challenge: challengeCookie });
+    const verifyCaller = appRouter.createCaller(verifyContext);
+
+    const result = await verifyCaller.auth.verifyEmailCode({ email: "learner@example.com", code: "000000" });
+    expect(result).toEqual({ success: false });
+
+    const sentCode = sendAuthenticationCode.mock.calls.at(-1)?.[0].code as string;
+    const validResult = await verifyCaller.auth.verifyEmailCode({ email: "session@example.com", code: sentCode });
+    expect(validResult).toEqual({ success: true });
+    expect(upsertUser).toHaveBeenCalledWith(expect.objectContaining({ email: "session@example.com", loginMethod: "email-otp" }));
+    expect(createSessionToken).toHaveBeenCalledWith(expect.stringMatching(/^email:/), expect.objectContaining({ expiresInMs: expect.any(Number) }));
+    expect((verifyContext.res as { cookie: ReturnType<typeof vi.fn> }).cookie).toHaveBeenCalledWith(COOKIE_NAME, "signed-local-session", expect.objectContaining({ httpOnly: true }));
+    expect((verifyContext.res as { clearCookie: ReturnType<typeof vi.fn> }).clearCookie).toHaveBeenCalled();
+
+    const protectedCaller = appRouter.createCaller({
+      ...createContext(),
+      user: await getUserByOpenId("email:test"),
+    });
+    await protectedCaller.learning.syncGuest({ rows: [{ gameId: "prompt-detective", attempts: 1, completions: 1, bestScore: 24, lastScore: 24 }] });
+    expect(mergeGuestProgressForUser).toHaveBeenCalledWith(7, expect.objectContaining({ gameId: "prompt-detective", bestScore: 24 }));
   });
 
   it("rejects malformed codes before verification", async () => {
