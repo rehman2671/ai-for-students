@@ -1,0 +1,31 @@
+import { describe, expect, it } from "vitest";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+const root = resolve(import.meta.dirname, "..");
+const read = (file: string) => readFileSync(resolve(root, file), "utf8");
+
+describe("production asset and analytics contracts", () => {
+  it("uses deploy-safe CDN assets in the homepage and game hub", () => {
+    const home = read("client/src/pages/Home.tsx");
+    const games = read("client/src/pages/GamePage.tsx");
+    const assets = read("client/src/lib/assets.ts");
+
+    expect(home).toContain('import { assetUrls } from "@/lib/assets";');
+    expect(games).toContain('import { assetUrls } from "@/lib/assets";');
+    expect(assets).toContain("https://files.manuscdn.com/");
+    expect(home).not.toContain("/manus-storage/");
+    expect(games).not.toContain("/manus-storage/");
+  });
+
+  it("keeps the favicon deploy-safe and avoids an unconditional Umami request", () => {
+    const html = read("client/index.html");
+    const main = read("client/src/main.tsx");
+
+    expect(html).toContain('rel="icon"');
+    expect(html).toContain("https://files.manuscdn.com/");
+    expect(html).not.toContain("%VITE_ANALYTICS_ENDPOINT%/umami");
+    expect(main).toContain("analyticsEndpoint && analyticsWebsiteId");
+    expect(main).toContain("document.head.appendChild(analyticsScript)");
+  });
+});

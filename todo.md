@@ -320,3 +320,11 @@
 - [x] Recheck write access after the user accepted the GitHub collaborator invitation.
 - [x] Push the validated release to `sahilk267/hostinger-ai-for-students` main.
 - [x] Verify the target repository commit and Hostinger redeploy source.
+
+## Production asset and analytics repair
+
+- [x] Inspect live homepage, favicon metadata and failed asset/analytics requests on aiforstudents.in.
+- [x] Replace production-only Manus storage asset dependencies with deployable references to the existing assets.
+- [x] Repair logo and favicon loading and add a production-safe fallback.
+- [x] Diagnose and correct the Umami 400 configuration without disabling useful analytics silently.
+- [x] Add regression coverage and validate the repaired production build and live URLs.

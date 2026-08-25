@@ -17,11 +17,12 @@ import {
 } from "lucide-react";
 import { toast } from "sonner";
 import AuthControls from "@/components/AuthControls";
+import { assetUrls } from "@/lib/assets";
 
-const heroImage = "/manus-storage/ai-students-hero_35b0cd1d.png";
-const studyImage = "/manus-storage/ai-students-study_51c9ad49.png";
-const careerImage = "/manus-storage/ai-students-career_6d4310b6.png";
-const markImage = "/manus-storage/ai-students-mark_e5155fd0.png";
+const heroImage = assetUrls.hero;
+const studyImage = assetUrls.study;
+const careerImage = assetUrls.career;
+const markImage = assetUrls.mark;
 
 const prompts = [
   {
