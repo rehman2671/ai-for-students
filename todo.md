@@ -210,10 +210,10 @@
 
 ## Hostinger migration readiness
 
-- [ ] Inventory every production dependency that is tied to Manus services, current database, storage and OAuth.
-- [ ] Decide whether Manus OAuth remains temporarily available or is replaced by Hostinger Mail OTP before migration.
-- [ ] Prepare a migration checklist for database, secrets, storage, domain, email and authentication cutover.
-- [ ] Identify the user-owned actions required in Hostinger hPanel and the tests required after cutover.
+- [x] Inventory every production dependency that is tied to Manus services, current database, storage and OAuth.
+- [x] Decide whether Manus OAuth remains temporarily available or is replaced by Hostinger Mail OTP before migration.
+- [x] Prepare a migration checklist for database, secrets, storage, domain, email and authentication cutover.
+- [x] Identify the user-owned actions required in Hostinger hPanel and the tests required after cutover.
 
 ## Hostinger-independent primary authentication
 
@@ -228,3 +228,12 @@
 
 - [x] Build an end-to-end server integration test that reconstructs authenticated context from the session cookie returned by local OTP verification.
 - [ ] Perform the real HTTPS browser OTP and guest-progress sync test after Hostinger mail and database are configured; keep this pending until user-owned staging access exists.
+
+## Repository comparison
+
+- [x] Inspect the user-provided GitHub repository and record its actual stack, features and deployment setup.
+- [x] Compare it against the current project for learning content, games, auth, persistence, safety, accessibility and Hostinger fit.
+- [x] Document risks, strengths and whether a merge or replacement is advisable.
+
+- [x] Write a completed comparison across content/games, authentication, persistence, safety/accessibility and Hostinger deployment fit.
+- [x] Record the merge-versus-replacement recommendation with concrete strengths and risks.
