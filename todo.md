@@ -255,3 +255,36 @@
 
 - [x] Implement a real server-side contact submission procedure with loading, success and error handling instead of mailto-only delivery.
 - [x] Add an explicit, truthful support response expectation without inventing unsupported business details.
+
+## Hostinger environment configuration
+
+- [ ] Verify the current release’s required server and public environment keys.
+- [ ] Provide a safe Hostinger entry/import method that does not expose secrets in GitHub or chat.
+- [ ] Validate the configured key set before the user starts deployment.
+
+## Database naming verification
+
+- [x] Verify whether the current project defines a database name or only consumes DATABASE_URL.
+- [x] Explain the exact Hostinger database-name action without exposing credentials.
+
+- [x] Document that the application does not hardcode a database name and that Hostinger’s selected MySQL database name belongs in DATABASE_URL.
+- [x] Explain the database-name setup to the user before deployment proceeds.
+
+## Hostinger database credential safety
+
+- [ ] Require replacement of the database password that was exposed in chat before deployment.
+- [ ] Prepare the DATABASE_URL template using the confirmed host, user and database name without storing the replacement password.
+- [ ] Guide the user to enter the replacement credential only in Hostinger’s protected environment-variable form.
+
+## Hostinger deployment monitoring
+
+- [ ] Record the user-initiated Hostinger deployment result and generated URL/status.
+- [ ] Diagnose and fix any build or runtime error reported by Hostinger without exposing secrets.
+- [ ] Run post-deployment smoke checks for landing page, contact form, local OTP and guest-progress sync.
+
+## Hostinger pnpm deployment fix
+
+- [x] Align repository package-manager metadata with Hostinger’s pnpm runtime.
+- [x] Re-run tests, typecheck and production build after the metadata change.
+- [ ] Push the fix to the private GitHub main branch and guide a redeploy.
+- [ ] Verify the next Hostinger build result and continue with runtime smoke tests if successful.
