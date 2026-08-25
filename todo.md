@@ -301,8 +301,8 @@
 ## Exact Hostinger source pnpm correction
 
 - [x] Verify the packageManager value in the exact repository/commit used by Hostinger.
-- [x] Apply the minimal pnpm 11.24.0 compatibility change to the intended deployment source.
-- [x] Validate and push the exact source, then confirm Hostinger sees the corrected commit.
+- [ ] Apply the minimal pnpm 11.24.0 compatibility change to the intended deployment source.
+- [ ] Validate and push the exact source, then confirm Hostinger sees the corrected commit.
 
 ## pnpm configuration migration follow-up
 
