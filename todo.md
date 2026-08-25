@@ -291,3 +291,21 @@
 
 - [x] Review the generated pnpm-workspace metadata and updated Hostinger handoff before finalizing the pnpm fix.
 - [x] Push any required workspace/handoff synchronization and save a checkpoint before redeploy guidance.
+
+## Hostinger mirror repository synchronization
+
+- [x] Verify whether `sahilk267/aiforstudents` contains the current release or an older clone.
+- [ ] Synchronize the mirror only if the user confirms it is the intended deployment source and has write access.
+- [ ] Confirm the Hostinger deployment points to the latest synchronized commit before redeploying.
+
+## Exact Hostinger source pnpm correction
+
+- [x] Verify the packageManager value in the exact repository/commit used by Hostinger.
+- [x] Apply the minimal pnpm 11.24.0 compatibility change to the intended deployment source.
+- [x] Validate and push the exact source, then confirm Hostinger sees the corrected commit.
+
+## pnpm configuration migration follow-up
+
+- [x] Verify the correct pnpm 11 config filename and schema for patches and overrides.
+- [x] Apply the user-provided packageManager and deprecated-config migration to the intended Hostinger source.
+- [x] Validate and push the corrected configuration, then guide a fresh deployment.
