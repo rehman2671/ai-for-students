@@ -288,3 +288,6 @@
 - [x] Re-run tests, typecheck and production build after the metadata change.
 - [ ] Push the fix to the private GitHub main branch and guide a redeploy.
 - [ ] Verify the next Hostinger build result and continue with runtime smoke tests if successful.
+
+- [ ] Review the generated pnpm-workspace metadata and updated Hostinger handoff before finalizing the pnpm fix.
+- [ ] Push any required workspace/handoff synchronization and save a checkpoint before redeploy guidance.

@@ -36,7 +36,7 @@ Configure these only in Hostinger’s protected environment-variable panel. Neve
 | `BUILT_IN_FORGE_API_URL`, `BUILT_IN_FORGE_API_KEY` | Manus-backed services still used by the application | Confirm before disabling |
 | `VITE_FRONTEND_FORGE_API_URL`, `VITE_FRONTEND_FORGE_API_KEY` | Browser-side configured service access where still required | Confirm before disabling |
 
-The production database must be created and migrated before testing authenticated progress. Do not run destructive schema operations against any existing database. Confirm whether the Hostinger MySQL database can be reached by the Node.js Web App using the account’s internal hostname and SSL requirements, then set the resulting connection string in `DATABASE_URL`.
+The application does not hardcode a database name. Drizzle reads the complete database identity from `DATABASE_URL`; the schema defines tables such as `users` and `learningProgress`, not the Hostinger database itself. Create or select any dedicated Hostinger MySQL database for this application, then use that database’s exact name, host, username, password and port in the connection string. The production database must be created and migrated before testing authenticated progress. Do not run destructive schema operations against any existing database. Confirm whether the Hostinger MySQL database can be reached by the Node.js Web App using the account’s internal hostname and SSL requirements, then set the resulting connection string in `DATABASE_URL`.
 
 ## Cutover order
 
