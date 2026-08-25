@@ -278,16 +278,16 @@
 
 ## Hostinger deployment monitoring
 
-- [ ] Record the user-initiated Hostinger deployment result and generated URL/status.
-- [ ] Diagnose and fix any build or runtime error reported by Hostinger without exposing secrets.
+- [x] Record the user-initiated Hostinger deployment result and generated URL/status.
+- [x] Diagnose and fix any build or runtime error reported by Hostinger without exposing secrets.
 - [ ] Run post-deployment smoke checks for landing page, contact form, local OTP and guest-progress sync.
 
 ## Hostinger pnpm deployment fix
 
 - [x] Align repository package-manager metadata with Hostinger’s pnpm runtime.
 - [x] Re-run tests, typecheck and production build after the metadata change.
-- [ ] Push the fix to the private GitHub main branch and guide a redeploy.
+- [x] Push the fix to the private GitHub main branch and guide a redeploy.
 - [ ] Verify the next Hostinger build result and continue with runtime smoke tests if successful.
 
-- [ ] Review the generated pnpm-workspace metadata and updated Hostinger handoff before finalizing the pnpm fix.
-- [ ] Push any required workspace/handoff synchronization and save a checkpoint before redeploy guidance.
+- [x] Review the generated pnpm-workspace metadata and updated Hostinger handoff before finalizing the pnpm fix.
+- [x] Push any required workspace/handoff synchronization and save a checkpoint before redeploy guidance.
