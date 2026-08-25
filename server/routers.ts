@@ -8,12 +8,27 @@ import { getSessionCookieOptions } from "./_core/cookies";
 import { systemRouter } from "./_core/systemRouter";
 import { protectedProcedure, publicProcedure, router } from "./_core/trpc";
 import { sdk } from "./_core/sdk";
-import { sendAuthenticationCode } from "./mail";
+import { sendAuthenticationCode, sendContactMessage } from "./mail";
 import { AUTH_EMAIL_CODE_COOKIE, canRequestEmailCode, clearEmailCodeChallenge, createEmailCodeChallenge, localEmailOpenId, normalizeEmail, verifyEmailCode } from "./authEmail";
 
 export const appRouter = router({
     // if you need to use socket.io, read and register route in server/_core/index.ts, all api should start with '/api/' so that the gateway can route correctly
   system: systemRouter,
+  contact: router({
+    submit: publicProcedure.input(z.object({
+      name: z.string().trim().min(1).max(100),
+      replyEmail: z.string().email().max(320),
+      subject: z.string().trim().min(1).max(160),
+      message: z.string().trim().min(1).max(4000),
+    })).mutation(async ({ input }) => {
+      try {
+        await sendContactMessage(input);
+        return { success: true as const };
+      } catch {
+        throw new TRPCError({ code: "SERVICE_UNAVAILABLE", message: "Contact delivery is temporarily unavailable" });
+      }
+    }),
+  }),
   auth: router({
     me: publicProcedure.query(opts => opts.ctx.user),
     requestEmailCode: publicProcedure.input(z.object({ email: z.string().email().max(320) })).mutation(async ({ ctx, input }) => {

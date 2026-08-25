@@ -237,3 +237,21 @@
 
 - [x] Write a completed comparison across content/games, authentication, persistence, safety/accessibility and Hostinger deployment fit.
 - [x] Record the merge-versus-replacement recommendation with concrete strengths and risks.
+
+## Hostinger deployment execution
+
+- [x] Confirm the current release is buildable and deployment-safe for Hostinger Node.js Web App.
+- [x] Prepare the exact hPanel configuration and environment-variable handoff without committing secrets.
+- [ ] Configure the user-owned Hostinger staging app and domain after hPanel access is provided.
+- [ ] Run post-deployment health, frontend, OTP, guest-progress and authenticated-session checks.
+- [ ] Record the final deployment status and any remaining cutover gate.
+
+## Contact and business information
+
+- [x] Audit current contact/about/footer information and identify missing owner-supplied details.
+- [x] Add a truthful contact page or section with functional form states and privacy-conscious handling.
+- [x] Add clear business identity, support email and response expectation without inventing address, phone, reviews or testimonials.
+- [x] Add validation, accessibility and responsive tests for the contact experience.
+
+- [x] Implement a real server-side contact submission procedure with loading, success and error handling instead of mailto-only delivery.
+- [x] Add an explicit, truthful support response expectation without inventing unsupported business details.

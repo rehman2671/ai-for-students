@@ -9,6 +9,13 @@ type SendAuthenticationCodeInput = {
   expiresInMinutes?: number;
 };
 
+type SendContactMessageInput = {
+  name: string;
+  replyEmail: string;
+  subject: string;
+  message: string;
+};
+
 const HOSTINGER_MAIL_BASE_URL = "https://api.mail.hostinger.com";
 let mailboxCache: HostingerMailbox | null = null;
 
@@ -63,6 +70,20 @@ export async function sendAuthenticationCode({ to, code, expiresInMinutes = 10 }
       to: [to],
       subject: "Your AI for Students verification code",
       text: `Your AI for Students verification code is ${code}. It expires in ${expiresInMinutes} minutes. If you did not request this code, you can ignore this email.`,
+    }),
+  });
+}
+
+export async function sendContactMessage({ name, replyEmail, subject, message }: SendContactMessageInput) {
+  if (!name || !replyEmail || !subject || !message) throw new Error("Contact message fields are required");
+  const mailbox = await getSenderMailbox();
+  await hostingerRequest(`/api/v1/mailboxes/${encodeURIComponent(mailbox.resourceId)}/send`, {
+    method: "POST",
+    body: JSON.stringify({
+      to: [ENV.authMailFrom],
+      subject: `[AI for Students contact] ${subject}`,
+      reply_to: [replyEmail],
+      text: `Name: ${name}\nReply email: ${replyEmail}\n\n${message}`,
     }),
   });
 }
